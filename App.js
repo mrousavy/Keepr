@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import CardStack, { Card } from 'react-native-card-stack-swiper';
 
 export default function App() {
   return (
