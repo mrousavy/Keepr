@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, NativeModules } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 
-class Swiper extends React.Component {
+ class MainScreen extends React.Component {
     static navigationOptions = {
       title: 'Swiper',
     };
