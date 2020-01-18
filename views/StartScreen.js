@@ -16,7 +16,7 @@ export class StartScreen extends React.Component {
     };
     render() {
         let { images } = this.state;
-        const {navigate} = this.props.navigation;
+        const { navigate } = this.props.navigation;
         return (
             <Button
             title="Pick images"
@@ -41,10 +41,9 @@ export class StartScreen extends React.Component {
 
     _pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            quality: 1,
+            allowsMultipleSelection: true
         });
 
         console.log(result);
