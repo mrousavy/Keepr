@@ -24,7 +24,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mrousavy.keepr"
+    },
+    "android": {
+      "package": "com.mrousavy.keepr"
     }
   }
 }
