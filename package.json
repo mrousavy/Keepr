@@ -13,8 +13,11 @@
     "react-dom": "~16.9.0",
     "react-native": "0.61.5",
     "react-native-card-stack-swiper": "^1.1.9",
+    "react-native-gesture-handler": "^1.5.3",
     "react-native-image-crop-picker": "^0.26.2",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "react-navigation": "^4.0.10",
+    "react-navigation-stack": "^2.0.15"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.0.0",
