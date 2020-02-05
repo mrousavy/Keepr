@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, StyleSheet, Text, View, TouchableHighlight, Alert } from 'react-native';
-import { ImageBrowser } from '../lib/ImageBrowser';
-import * as Permissions from 'expo-permissions';
+import { Permissions } from 'expo-permissions';
+import { ImageBrowser } from 'expo-multiple-media-imagepicker';
 
 
 export class StartScreen extends React.Component {
@@ -25,10 +25,18 @@ export class StartScreen extends React.Component {
                         Alert.alert('Modal has been closed.');
                     }}>
                         <View>
-                            <ImageBrowser
-                                onChange={(num) => {console.log(num);}}
-                                callback={(num, onSubmit) => {}}
-                                />
+                        <ImageBrowser
+                            max={101} // Maximum number of pickable image. default is None
+                            headerCloseText={'close'} // Close button text on header. default is 'Close'.
+                            headerDoneText={'done'} // Done button text on header. default is 'Done'.
+                            headerButtonColor={'#E31676'} // Button color on header.
+                            headerSelectText={'n selected'} // Word when picking.  default is 'n selected'.
+                            badgeColor={'#E31676'}
+                            emptyText={'empty.'}
+                            callback={(asset) => {
+                                Alert.alert(asset);
+                            }}
+                            />
                         </View>
                 </Modal>
 
@@ -42,17 +50,19 @@ export class StartScreen extends React.Component {
         );
     }
 
-    componentDidMount() {
-      this.getPermissionAsync();
-      console.log('hi');
+    imageBrowserCallback(images) {
+        console.log(images);
     }
 
-    getPermissionAsync = async () => {
-        if (Constants.platform.ios) {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-            if (status !== 'granted') {
-                alert('Sorry, we need camera roll permissions to make this work!');
+    async componentDidMount() {
+        const permission = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+        if (permission.status !== 'granted') {
+            const newPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            if (newPermission.status === 'granted') {
+                console.log('now granted');
             }
+        } else {
+            console.log('already granted');
         }
     }
 }
