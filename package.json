@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "react": "16.9.0",
-    "react-native": "0.61.5"
+    "react-native": "0.61.5",
+    "react-native-card-stack-swiper": "^1.1.9",
+    "react-native-customized-image-picker": "^0.1.11",
+    "react-navigation": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
