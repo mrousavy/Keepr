@@ -23,6 +23,11 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+
+      <activity
+          android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+          android:exported="true"
+          android:theme="@style/Theme_Light.Default" />
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
 
