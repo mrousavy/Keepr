@@ -36,6 +36,9 @@ target 'Keepr' do
 
   pod 'RNCustomizedImagePicker', :path => '../node_modules/react-native-customized-image-picker'
 
+	pod 'QBImagePickerController', :path => '../node_modules/react-native-customized-image-picker/ios/QBImagePicker/QBImagePickerController.podspec'
+	pod 'RSKImageCropper'
+	
   target 'KeeprTests' do
     inherit! :search_paths
     # Pods for testing
