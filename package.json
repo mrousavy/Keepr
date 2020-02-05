@@ -1,31 +1,29 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "name": "Keepr",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@react-native-community/masked-view": "^0.1.6",
-    "expo": "~36.0.0",
-    "expo-multiple-media-imagepicker": "^1.2.1",
     "react": "16.9.0",
-    "react-dom": "~16.9.0",
-    "react-native": "0.61.5",
-    "react-native-card-stack-swiper": "^1.1.9",
-    "react-native-gesture-handler": "~1.5.0",
-    "react-native-reanimated": "~1.4.0",
-    "react-native-safe-area-context": "0.6.0",
-    "react-native-screens": "2.0.0-alpha.12",
-    "react-native-web": "~0.11.7",
-    "react-navigation": "^4.0.10",
-    "react-navigation-stack": "^2.0.15"
+    "react-native": "0.61.5"
   },
   "devDependencies": {
-    "babel-preset-expo": "~8.0.0",
-    "@babel/core": "^7.0.0"
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.5.1",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "react-test-renderer": "16.9.0"
   },
-  "private": true
+  "jest": {
+    "preset": "react-native"
+  }
 }
