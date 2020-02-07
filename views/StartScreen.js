@@ -21,7 +21,7 @@ export class StartScreen extends React.Component {
                     onPress={() => {
                         this.openImagePicker();
                     }}>
-                    <LinearGradient colors={['#aaaad6', '#aaaad6', '#70a5d5']} style={styles.linearGradient}>
+                    <LinearGradient colors={['#aaaad6', '#8484b5']} style={styles.linearGradient}>
                         <Text style={styles.buttonText}>Pick images</Text>
                     </LinearGradient>
                 </TouchableOpacity>
