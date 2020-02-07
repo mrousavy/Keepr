@@ -7,7 +7,7 @@ import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
 export class StartScreen extends React.Component {
     static navigationOptions = {
-      title: 'Start',
+        headerShown: false
     };
     state = {
       images: null

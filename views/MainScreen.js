@@ -1,55 +1,44 @@
 import React from 'react';
 import {
+  Button,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   Image,
 } from 'react-native';
-import CardStack, { Card } from 'react-native-card-stack-swiper';
+import Swiper from 'react-native-deck-swiper';
 
 export class MainScreen extends React.Component {
     static navigationOptions = {
-      title: 'Swiper',
+        headerShown: false
     };
     render() {
       const { images } = this.props.navigation.state.params;
       return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'red' }}>
 
-          <CardStack
-            style={styles.content}
-            renderNoMoreCards={() => <Text style={{ fontWeight: '700', fontSize: 18, color: 'gray' }}>No more cards :(</Text>}
-            ref={swiper => {
-              this.swiper = swiper
+        <Swiper style={{backgroundColor: 'red', color: 'transparent'}}
+            cards={images}
+            renderCard={(image, key) => {
+                return (
+                    <View key={key} style={styles.card}>
+                        <Image source={image} style={{width: 320, height:470, borderRadius: 5}}></Image>
+                    </View>
+                )
             }}
-          >
-            <Card style={[styles.card, styles.card1]}><Image style={{width: 320, height: 470, resizeMode: 'contain'}} source={images[0]}></Image></Card>
-            <Card style={[styles.card, styles.card2]}><Text style={styles.label}>Klug</Text></Card>
-            <Card style={[styles.card, styles.card1]}><Text style={styles.label}>Ambitioniert</Text></Card>
-            <Card style={[styles.card, styles.card2]}><Text style={styles.label}>Reich</Text></Card>
-          </CardStack>
+            onSwiped={(cardIndex) => {console.log(cardIndex)}}
+            onSwipedAll={() => {console.log('onSwipedAll')}}
+            cardIndex={0}
+            stackSize= {images.length}>
+            <Button
+                onPress={() => {console.log('oulala')}}
+                title="Press me">
+                You can press me
+            </Button>
+        </Swiper>
 
-          <View style={styles.footer}>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={[styles.button, styles.red]} onPress={() => {
-                this.swiper.swipeLeft();
-              }}>
-                <Text>RED</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.orange]} onPress={() => {
-                this.swiper.goBackFromLeft();
-              }}>
-                <Text>BLACK</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.green]} onPress={() => {
-                this.swiper.swipeRight();
-              }}>
-                <Text>GREEN</Text>
-              </TouchableOpacity>
-            </View>
 
-          </View>
         </View>
       );
     }
@@ -62,11 +51,6 @@ export class MainScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#f2f2f2',
-  },
   content:{
     flex: 5,
     alignItems: 'center',
@@ -75,7 +59,6 @@ const styles = StyleSheet.create({
   card:{
     width: 320,
     height: 470,
-    backgroundColor: '#FE474C',
     borderRadius: 5,
     shadowColor: 'rgba(0,0,0,0.5)',
     shadowOffset: {
@@ -83,6 +66,7 @@ const styles = StyleSheet.create({
       height: 1
     },
     shadowOpacity:0.5,
+    alignSelf: 'center'
   },
   label: {
     lineHeight: 200,
@@ -90,7 +74,6 @@ const styles = StyleSheet.create({
     fontSize: 55,
     fontFamily: 'System',
     color: '#ffffff',
-    backgroundColor: 'transparent',
   },
   footer:{
     flex:1,
@@ -113,29 +96,5 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     zIndex: 0,
-  },
-  orange:{
-    width:55,
-    height:55,
-    borderWidth:6,
-    borderColor:'rgb(246,190,66)',
-    borderRadius:55,
-    marginTop:-15
-  },
-  green:{
-    width:75,
-    height:75,
-    backgroundColor:'#fff',
-    borderRadius:75,
-    borderWidth:6,
-    borderColor:'#01df8a',
-  },
-  red:{
-    width:75,
-    height:75,
-    backgroundColor:'#fff',
-    borderRadius:75,
-    borderWidth:6,
-    borderColor:'#fd267d',
   }
 });
