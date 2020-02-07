@@ -3,20 +3,20 @@ import { Modal, StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-na
 import ImagePicker from "react-native-customized-image-picker";
 import LinearGradient from 'react-native-linear-gradient';
 import {PalewaveColors} from '../PalewaveColors';
+import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
 export class StartScreen extends React.Component {
     static navigationOptions = {
       title: 'Start',
     };
     state = {
-      images: null,
-      showPopup: false
+      images: null
     };
 
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <View style={styles.vBox}>
+
                 <View style={styles.hBox}>
                     <TouchableOpacity style={styles.button}
                         onPress={() => {
@@ -38,7 +38,11 @@ export class StartScreen extends React.Component {
         ImagePicker.openPicker({
             multiple: true
         }).then(images => {
-            console.log(images);
+            var mappedImages = images.map(i => {
+                console.log('received image', i);
+                return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+            });
+            this.props.navigation.navigate('Main', {images: mappedImages});
         }).catch(e => {
             console.log(e);
         });
@@ -94,5 +98,17 @@ const styles = StyleSheet.create({
       color: 'rgb(150,150,150)',
       fontWeight: 'bold',
       margin: 10
+  },
+  card:{
+    width: 320,
+    height: 470,
+    backgroundColor: '#FE474C',
+    borderRadius: 5,
+    shadowColor: 'rgba(0,0,0,0.5)',
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity:0.5,
   }
 });

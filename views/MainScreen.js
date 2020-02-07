@@ -13,7 +13,7 @@ export class MainScreen extends React.Component {
       title: 'Swiper',
     };
     render() {
-      const {navigate} = this.props.navigation;
+      const { images } = this.props.navigation.state.params;
       return (
         <View style={{ flex: 1 }}>
 
@@ -24,12 +24,10 @@ export class MainScreen extends React.Component {
               this.swiper = swiper
             }}
           >
-            <Card style={[styles.card, styles.card1]}><Text style={styles.label}>Hübsch</Text></Card>
+            <Card style={[styles.card, styles.card1]}><Image style={{width: 320, height: 470, resizeMode: 'contain'}} source={images[0]}></Image></Card>
             <Card style={[styles.card, styles.card2]}><Text style={styles.label}>Klug</Text></Card>
             <Card style={[styles.card, styles.card1]}><Text style={styles.label}>Ambitioniert</Text></Card>
             <Card style={[styles.card, styles.card2]}><Text style={styles.label}>Reich</Text></Card>
-
-            <Card style={[styles.card, styles.card1]}><Text style={styles.label}>{`Suicidal und `}</Text><Text style={styles.label}>{`Depressiv`}</Text></Card>
           </CardStack>
 
           <View style={styles.footer}>
@@ -54,6 +52,10 @@ export class MainScreen extends React.Component {
           </View>
         </View>
       );
+    }
+
+    componentDidMount() {
+      console.log();
     }
   }
 
@@ -81,12 +83,6 @@ const styles = StyleSheet.create({
       height: 1
     },
     shadowOpacity:0.5,
-  },
-  card1: {
-    backgroundColor: '#FE474C',
-  },
-  card2: {
-    backgroundColor: '#FEB12C',
   },
   label: {
     lineHeight: 200,
