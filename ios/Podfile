@@ -39,6 +39,8 @@ target 'Keepr' do
 	pod 'QBImagePickerController', :path => '../node_modules/react-native-customized-image-picker/ios/QBImagePicker/QBImagePickerController.podspec'
 	pod 'RSKImageCropper'
 	
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'KeeprTests' do
     inherit! :search_paths
     # Pods for testing

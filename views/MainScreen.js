@@ -26,11 +26,12 @@ export class MainScreen extends React.Component {
             onSwiped={() => console.log('onSwiped')}
             onSwipedLeft={() => console.log('onSwipedLeft')}
           >
-            <Card style={[styles.card, styles.card1]}><Text style={styles.label}>A</Text></Card>
-            <Card style={[styles.card, styles.card2]} onSwipedLeft={() => alert('onSwipedLeft')}><Text style={styles.label}>B</Text></Card>
-            <Card style={[styles.card, styles.card1]}><Text style={styles.label}>C</Text></Card>
-            <Card style={[styles.card, styles.card2]}><Text style={styles.label}>D</Text></Card>
-            <Card style={[styles.card, styles.card1]}><Text style={styles.label}>E</Text></Card>
+            <Card style={[styles.card, styles.card1]}><Text style={styles.label}>Hübsch</Text></Card>
+            <Card style={[styles.card, styles.card2]}><Text style={styles.label}>Klug</Text></Card>
+            <Card style={[styles.card, styles.card1]}><Text style={styles.label}>Ambitioniert</Text></Card>
+            <Card style={[styles.card, styles.card2]}><Text style={styles.label}>Reich</Text></Card>
+
+            <Card style={[styles.card, styles.card1]}><Text style={styles.label}>{`Suicidal und `}</Text><Text style={styles.label}>{`Depressiv`}</Text></Card>
           </CardStack>
 
           <View style={styles.footer}>
@@ -38,17 +39,17 @@ export class MainScreen extends React.Component {
               <TouchableOpacity style={[styles.button, styles.red]} onPress={() => {
                 this.swiper.swipeLeft();
               }}>
-                <Image source={require('./assets/red.png')} resizeMode={'contain'} style={{ height: 62, width: 62 }} />
+                <Text>RED</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.button, styles.orange]} onPress={() => {
                 this.swiper.goBackFromLeft();
               }}>
-                <Image source={require('./assets/back.png')} resizeMode={'contain'} style={{ height: 32, width: 32, borderRadius: 5 }} />
+                <Text>BLACK</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.button, styles.green]} onPress={() => {
                 this.swiper.swipeRight();
               }}>
-                <Image source={require('./assets/green.png')} resizeMode={'contain'} style={{ height: 62, width: 62 }} />
+                <Text>GREEN</Text>
               </TouchableOpacity>
             </View>
 
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FEB12C',
   },
   label: {
-    lineHeight: 400,
+    lineHeight: 200,
     textAlign: 'center',
     fontSize: 55,
     fontFamily: 'System',
