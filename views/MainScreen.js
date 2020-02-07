@@ -23,8 +23,6 @@ export class MainScreen extends React.Component {
             ref={swiper => {
               this.swiper = swiper
             }}
-            onSwiped={() => console.log('onSwiped')}
-            onSwipedLeft={() => console.log('onSwipedLeft')}
           >
             <Card style={[styles.card, styles.card1]}><Text style={styles.label}>Hübsch</Text></Card>
             <Card style={[styles.card, styles.card2]}><Text style={styles.label}>Klug</Text></Card>

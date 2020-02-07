@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
 import ImagePicker from "react-native-customized-image-picker";
 import LinearGradient from 'react-native-linear-gradient';
+import {PalewaveColors} from '../PalewaveColors';
 
 export class StartScreen extends React.Component {
     static navigationOptions = {
@@ -15,17 +16,18 @@ export class StartScreen extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <View>
+            <View style={styles.centerContainer}>
                 <TouchableOpacity style={styles.button}
                     onPress={() => {
                         this.openImagePicker();
                     }}>
-                    <View style={styles.textContainer}>
-                        <LinearGradient colors={['#99ccff', '#66b3ff', '#3399ff']} style={styles.linearGradient}>
-                            <Text style={styles.buttonText}>Pick image</Text>
-                        </LinearGradient>
-                    </View>
+                    <LinearGradient colors={['#aaaad6', '#aaaad6', '#70a5d5']} style={styles.linearGradient}>
+                        <Text style={styles.buttonText}>Pick images</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
+
+
+                <Text style={styles.smallText}>an app by mrousavy.</Text>
             </View>
         );
     }
@@ -51,39 +53,41 @@ export class StartScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  linearGradient: {
-    flex: 1,
-    borderRadius: 55
+  centerContainer: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20
   },
   button:{
     shadowColor: 'rgba(0,0,0,0.3)',
     shadowOffset: {
-      width: 0,
-      height: 1
+      width: 3,
+      height: 5
     },
     shadowOpacity: 0.5,
-    backgroundColor:'#fff',
-    zIndex: 0,
-    width:120,
-    height:55,
-    backgroundColor: 'transparent'
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  linearGradient: {
+    borderRadius: 55,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10
   },
   buttonText: {
       fontSize: 18,
-      color: 'rgb(100,100,100)',
+      color: 'white',
       fontWeight: 'bold',
-      fontSize: 18,
-      margin: 10,
-      width: 200
   },
-  textContainer: {
-    flex: 1,
-    flexDirection: 'row',
+  smallText: {
+      fontSize: 10,
+      color: 'rgb(150,150,150)',
+      fontWeight: 'bold',
+      margin: 10
   }
 });
