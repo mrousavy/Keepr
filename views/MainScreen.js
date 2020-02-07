@@ -16,29 +16,24 @@ export class MainScreen extends React.Component {
     render() {
       const { images } = this.props.navigation.state.params;
       return (
-        <View style={{ flex: 1, backgroundColor: 'red' }}>
-
-        <Swiper style={{backgroundColor: 'red', color: 'transparent'}}
-            cards={images}
-            renderCard={(image, key) => {
-                return (
-                    <View key={key} style={styles.card}>
-                        <Image source={image} style={{width: 320, height:470, borderRadius: 5}}></Image>
-                    </View>
-                )
-            }}
-            onSwiped={(cardIndex) => {console.log(cardIndex)}}
-            onSwipedAll={() => {console.log('onSwipedAll')}}
-            cardIndex={0}
-            stackSize= {images.length}>
-            <Button
-                onPress={() => {console.log('oulala')}}
-                title="Press me">
-                You can press me
-            </Button>
-        </Swiper>
-
-
+        <View style={styles.vBox}>
+          <Swiper style={styles.hBox}
+              cards={images}
+              backgroundColor='transparent'
+              marginTop={50}
+              renderCard={(image, key) => {
+                  return (
+                      <View key={key} style={styles.card}>
+                          <Image source={image} style={{width: 320, height:470, borderRadius: 5}}></Image>
+                      </View>
+                  )
+              }}
+              onSwiped={(cardIndex) => {console.log(cardIndex)}}
+              onSwipedAll={() => {console.log('onSwipedAll')}}
+              cardIndex={0}
+              stackSize={images.length}>
+          </Swiper>
+          <Text>Hi</Text>
         </View>
       );
     }
@@ -51,10 +46,19 @@ export class MainScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
-  content:{
-    flex: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+  vBox: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20
+  },
+  hBox: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20
   },
   card:{
     width: 320,
