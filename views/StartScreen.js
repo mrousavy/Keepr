@@ -16,15 +16,17 @@ export class StartScreen extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <View style={styles.centerContainer}>
-                <TouchableOpacity style={styles.button}
-                    onPress={() => {
-                        this.openImagePicker();
-                    }}>
-                    <LinearGradient colors={['#aaaad6', '#8484b5']} style={styles.linearGradient}>
-                        <Text style={styles.buttonText}>Pick images</Text>
-                    </LinearGradient>
-                </TouchableOpacity>
+            <View style={styles.vBox}>
+                <View style={styles.hBox}>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => {
+                            this.openImagePicker();
+                        }}>
+                        <LinearGradient colors={['#aaaad6', '#8484b5']} style={styles.linearGradient}>
+                            <Text style={styles.buttonText}>Pick images</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                </View>
 
 
                 <Text style={styles.smallText}>an app by mrousavy.</Text>
@@ -53,24 +55,27 @@ export class StartScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
-  centerContainer: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 20
-  },
+    vBox: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20
+    },
+    hBox: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20
+    },
   button:{
     shadowColor: 'rgba(0,0,0,0.3)',
     shadowOffset: {
       width: 3,
       height: 5
     },
-    shadowOpacity: 0.5,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    shadowOpacity: 0.5
   },
   linearGradient: {
     borderRadius: 55,
