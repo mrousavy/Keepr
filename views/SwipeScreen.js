@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
-export class MainScreen extends React.Component {
+export class SwipeScreen extends React.Component {
     static navigationOptions = {
         headerShown: false
     };

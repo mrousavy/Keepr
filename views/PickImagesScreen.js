@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {PalewaveColors} from '../PalewaveColors';
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
-export class StartScreen extends React.Component {
+export class PickImagesScreen extends React.Component {
     static navigationOptions = {
         headerShown: false
     };
