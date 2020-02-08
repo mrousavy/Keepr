@@ -19,8 +19,8 @@ export class SwipeScreen extends React.Component {
         headerShown: false
     };
     state = {
-      cardWidth: 50,
-      cardHeight: 50
+      cardWidth: 270,
+      cardHeight: 270
     }
     render() {
       const { images } = this.props.navigation.state.params;
@@ -74,11 +74,11 @@ export class SwipeScreen extends React.Component {
       this.setState({cardHeight: cardHeight, cardWidth: cardWidth});
     }
     componentDidMount() {
-      updateDimensions();
+      this.updateDimensions();
       Orientation.addOrientationListener(this._orientationDidChange);
     }
     _orientationDidChange = (orientation) => {
-      updateDimensions();
+      this.updateDimensions();
     }
     componentWillUnmount() {
       Orientation.removeOrientationListener(this._orientationDidChange);
