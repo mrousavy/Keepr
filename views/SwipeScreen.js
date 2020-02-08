@@ -12,6 +12,7 @@ import {
 import Slider from '@react-native-community/slider';
 import Swiper from 'react-native-deck-swiper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -25,6 +26,7 @@ if (screenWidth > screenHeight) {
   cardHeight = (cardWidth / 3) * 4;
 }
 console.log(cardWidth + ' x ' + cardHeight);
+const VIBRATE = false;
 
 export class SwipeScreen extends React.Component {
   static navigationOptions = {
@@ -41,9 +43,11 @@ export class SwipeScreen extends React.Component {
   };
   onPressedCards() {
     this.slideDot(-30);
+    if (VIBRATE) ReactNativeHapticFeedback.trigger('impactLight');
   }
   onPressedImages() {
     this.slideDot(30);
+    if (VIBRATE) ReactNativeHapticFeedback.trigger('impactLight');
   }
 
   render() {
@@ -139,14 +143,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'blue',
   },
   hBox: {
     flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
   },
   hBoxStretch: {
     flex: 8,
@@ -154,7 +156,6 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     marginLeft: -10,
     padding: 20,
-    backgroundColor: 'red',
   },
   card: {
     borderRadius: 5,

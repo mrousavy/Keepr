@@ -45,6 +45,8 @@ target 'Keepr' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNReactNativeHapticFeedback', :path => '../node_modules/react-native-haptic-feedback'
+
   target 'KeeprTests' do
     inherit! :search_paths
     # Pods for testing

@@ -17,6 +17,7 @@
     "react-native-customized-image-picker": "^0.1.11",
     "react-native-deck-swiper": "^1.6.7",
     "react-native-gesture-handler": "^1.5.6",
+    "react-native-haptic-feedback": "^1.9.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-safe-area-context": "^0.7.2",
     "react-native-screens": "^2.0.0-beta.2",
