@@ -28,6 +28,9 @@ export class SwipeScreen extends React.Component {
   static navigationOptions = {
     headerShown: false,
   };
+  state = {
+    zoomPercentage: 100,
+  };
   render() {
     const {images} = this.props.navigation.state.params;
     console.log(images);
@@ -66,17 +69,22 @@ export class SwipeScreen extends React.Component {
             stackSize={images.length}></Swiper>
         </View>
 
-        <Slider
-          style={{width: 200, height: 40}}
-          minimumValue={0}
-          maximumValue={1}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000"
-        />
-        <View>
-          <Button title="1"></Button>
-          <Button title="2"></Button>
-          <Button title="3"></Button>
+        <View style={styles.vBox}>
+          <Slider
+            style={(styles.hBox, {width: 200, height: 40})}
+            minimumValue={100}
+            maximumValue={1000}
+            minimumTrackTintColor="#555087"
+            maximumTrackTintColor="#aaaad6"
+            onValueChange={v => this.setState({zoomPercentage: parseInt(v)})}
+            value={this.state.zoomPercentage}
+          />
+          <Text style={styles.smallText}>{this.state.zoomPercentage}%</Text>
+        </View>
+        <View style={styles.hBox}>
+          <TouchableOpacity></TouchableOpacity>
+          <TouchableOpacity></TouchableOpacity>
+          <TouchableOpacity></TouchableOpacity>
         </View>
       </View>
     );
@@ -100,11 +108,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
   hBoxStretch: {
-    flex: 1,
+    flex: 8,
     flexDirection: 'row',
     alignSelf: 'stretch',
     marginLeft: -10,
     padding: 20,
+    backgroundColor: 'red',
   },
   card: {
     borderRadius: 5,
@@ -144,5 +153,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 0,
+  },
+  smallText: {
+    fontSize: 14,
+    color: 'rgb(50,50,50)',
+    fontWeight: '200',
   },
 });
