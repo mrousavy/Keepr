@@ -22,6 +22,7 @@ if (screenWidth > screenHeight) {
   cardWidth = screenWidth * 0.85;
   cardHeight = cardWidth / 3 * 4;
 }
+console.log(cardWidth + ' x ' + cardHeight);
 
 export class SwipeScreen extends React.Component {
     static navigationOptions = {
@@ -37,7 +38,7 @@ export class SwipeScreen extends React.Component {
               marginTop={50}
               renderCard={(image, key) => {
                   return (
-                      <View key={key} style={styles.card}>
+                      <View key={key} style={styles.card, {width: cardWidth, height: cardHeight}}>
                           <Image source={image} style={{width: cardWidth, height:cardHeight, borderRadius: 5}}></Image>
                       </View>
                   )
@@ -87,8 +88,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   card:{
-    width: cardWidth,
-    height: cardHeight,
     borderRadius: 5,
     shadowColor: 'rgba(0,0,0,0.5)',
     shadowOffset: {

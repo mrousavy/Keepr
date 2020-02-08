@@ -16,7 +16,6 @@ export class PickImagesScreen extends React.Component {
     render() {
         return (
             <View style={styles.vBox}>
-
                 <View style={styles.hBox}>
                     <TouchableOpacity style={styles.button}
                         onPress={() => {
