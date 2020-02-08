@@ -5,8 +5,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
+  Image
 } from 'react-native';
+import Slider from '@react-native-community/slider';
 import Swiper from 'react-native-deck-swiper';
 
 export class SwipeScreen extends React.Component {
@@ -34,6 +35,13 @@ export class SwipeScreen extends React.Component {
               stackSize={images.length}>
           </Swiper>
           <Text>Hi</Text>
+          <Slider
+              style={{width: 200, height: 40}}
+              minimumValue={0}
+              maximumValue={1}
+              minimumTrackTintColor="#FFFFFF"
+              maximumTrackTintColor="#000000"
+            />
         </View>
       );
     }

@@ -8,9 +8,10 @@ const MainNavigator = createStackNavigator({
     Swipe: {screen: SwipeScreen},
   },
   {
-    initialRouteName: "PickImages",
+    initialRouteName: "Swipe",
+    initialRouteParams: {images: []},
     defaultNavigationOptions: {
-      gesturesEnabled: false
+      gestureEnabled: false
     }
   });
 

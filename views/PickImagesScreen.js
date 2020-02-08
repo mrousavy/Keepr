@@ -42,7 +42,7 @@ export class PickImagesScreen extends React.Component {
                 console.log('received image', i);
                 return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
             });
-            this.props.navigation.navigate('Main', {images: mappedImages});
+            this.props.navigation.navigate('Swipe', {images: mappedImages});
         }).catch(e => {
             console.log(e);
         });
