@@ -5,10 +5,23 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import Swiper from 'react-native-deck-swiper';
+
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+var cardWidth;
+var cardHeight;
+if (screenWidth > screenHeight) {
+  cardHeight = screenHeight * 0.85;
+  cardWidth = cardHeight / 3 * 4;
+} else {
+  cardWidth = screenWidth * 0.85;
+  cardHeight = cardWidth / 3 * 4;
+}
 
 export class SwipeScreen extends React.Component {
     static navigationOptions = {
@@ -18,14 +31,14 @@ export class SwipeScreen extends React.Component {
       const { images } = this.props.navigation.state.params;
       return (
         <View style={styles.vBox}>
-          <Swiper style={styles.hBox}
+          <Swiper
               cards={images}
               backgroundColor='transparent'
               marginTop={50}
               renderCard={(image, key) => {
                   return (
                       <View key={key} style={styles.card}>
-                          <Image source={image} style={{width: 320, height:470, borderRadius: 5}}></Image>
+                          <Image source={image} style={{width: cardWidth, height:cardHeight, borderRadius: 5}}></Image>
                       </View>
                   )
               }}
@@ -34,7 +47,6 @@ export class SwipeScreen extends React.Component {
               cardIndex={0}
               stackSize={images.length}>
           </Swiper>
-          <Text>Hi</Text>
           <Slider
               style={{width: 200, height: 40}}
               minimumValue={0}
@@ -42,12 +54,13 @@ export class SwipeScreen extends React.Component {
               minimumTrackTintColor="#FFFFFF"
               maximumTrackTintColor="#000000"
             />
+            <View>
+              <Button title='1'></Button>
+              <Button title='2'></Button>
+              <Button title='3'></Button>
+            </View>
         </View>
       );
-    }
-
-    componentDidMount() {
-      console.log();
     }
   }
 
@@ -59,18 +72,23 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: 20
+      padding: 20,
+      backgroundColor: 'green'
   },
   hBox: {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: 20
+      padding: 20,
+      backgroundColor: 'red'
+  },
+  hElement: {
+    justifyContent: 'center'
   },
   card:{
-    width: 320,
-    height: 470,
+    width: cardWidth,
+    height: cardHeight,
     borderRadius: 5,
     shadowColor: 'rgba(0,0,0,0.5)',
     shadowOffset: {
