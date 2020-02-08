@@ -34,6 +34,7 @@ export class SwipeScreen extends React.Component {
   };
   state = {
     zoomPercentage: 100,
+    viewIndex: 0,
     selectedDotOffset: new Animated.Value(-30),
   };
   slideDot = offset => {
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
     flex: 8,
     flexDirection: 'row',
     alignSelf: 'stretch',
-    marginLeft: -10,
+    marginLeft: -40,
     padding: 20,
   },
   card: {
