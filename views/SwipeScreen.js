@@ -10,25 +10,21 @@ import {
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import Swiper from 'react-native-deck-swiper';
+import Orientation from 'react-native-orientation';
 
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
-var cardWidth;
-var cardHeight;
-if (screenWidth > screenHeight) {
-  cardHeight = screenHeight * 0.85;
-  cardWidth = cardHeight / 3 * 4;
-} else {
-  cardWidth = screenWidth * 0.85;
-  cardHeight = cardWidth / 3 * 4;
-}
+
 
 export class SwipeScreen extends React.Component {
     static navigationOptions = {
         headerShown: false
     };
+    state = {
+      cardWidth: 50,
+      cardHeight: 50
+    }
     render() {
       const { images } = this.props.navigation.state.params;
+      const { cardWidth, cardHeight } = this.state;
       return (
         <View style={styles.vBox}>
           <Swiper
@@ -37,7 +33,7 @@ export class SwipeScreen extends React.Component {
               marginTop={50}
               renderCard={(image, key) => {
                   return (
-                      <View key={key} style={styles.card}>
+                      <View key={key} style={styles.card, {width: cardWidth, height: cardHeight}}>
                           <Image source={image} style={{width: cardWidth, height:cardHeight, borderRadius: 5}}></Image>
                       </View>
                   )
@@ -62,7 +58,32 @@ export class SwipeScreen extends React.Component {
         </View>
       );
     }
-  }
+
+    updateDimensions() {
+      const screenWidth = Dimensions.get('window').width;
+      const screenHeight = Dimensions.get('window').height;
+      var cardWidth;
+      var cardHeight;
+      if (screenWidth > screenHeight) {
+        cardHeight = screenHeight * 0.85;
+        cardWidth = cardHeight / 3 * 4;
+      } else {
+        cardWidth = screenWidth * 0.85;
+        cardHeight = cardWidth / 3 * 4;
+      }
+      this.setState({cardHeight: cardHeight, cardWidth: cardWidth});
+    }
+    componentDidMount() {
+      updateDimensions();
+      Orientation.addOrientationListener(this._orientationDidChange);
+    }
+    _orientationDidChange = (orientation) => {
+      updateDimensions();
+    }
+    componentWillUnmount() {
+      Orientation.removeOrientationListener(this._orientationDidChange);
+    }
+}
 
 
 
@@ -87,8 +108,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   card:{
-    width: cardWidth,
-    height: cardHeight,
     borderRadius: 5,
     shadowColor: 'rgba(0,0,0,0.5)',
     shadowOffset: {
