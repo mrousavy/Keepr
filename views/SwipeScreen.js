@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  Animated,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import Swiper from 'react-native-deck-swiper';
@@ -31,7 +32,20 @@ export class SwipeScreen extends React.Component {
   };
   state = {
     zoomPercentage: 100,
+    selectedDotOffset: new Animated.Value(-30),
   };
+  slideDot = offset => {
+    Animated.spring(this.state.selectedDotOffset, {
+      toValue: offset,
+    }).start();
+  };
+  onPressedCards() {
+    this.slideDot(-30);
+  }
+  onPressedImages() {
+    this.slideDot(30);
+  }
+
   render() {
     const {images} = this.props.navigation.state.params;
     console.log(images);
@@ -83,19 +97,30 @@ export class SwipeScreen extends React.Component {
           <Text style={styles.smallText}>{this.state.zoomPercentage}%</Text>
         </View>
         <View style={styles.hBox}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.onPressedCards()}>
             <Icon name="cards" size={40} color="#555087" />
           </TouchableOpacity>
-          <TouchableOpacity style={{marginLeft: 20}}>
+          <TouchableOpacity
+            style={{marginLeft: 20}}
+            onPress={() => this.onPressedImages()}>
             <Icon name="image-move" size={40} color="#555087" />
           </TouchableOpacity>
         </View>
-        <Icon
-          style={{margin: 0}}
-          name="circle-small"
-          size={20}
-          color="#555087"
-        />
+        <Animated.View
+          style={{
+            transform: [
+              {
+                translateX: this.state.selectedDotOffset,
+              },
+            ],
+          }}>
+          <Icon
+            style={{margin: 0}}
+            name="circle-small"
+            size={20}
+            color="#555087"
+          />
+        </Animated.View>
       </View>
     );
   }
