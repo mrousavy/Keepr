@@ -36,7 +36,7 @@ export class SwipeScreen extends React.Component {
     const {images} = this.props.navigation.state.params;
     console.log(images);
     return (
-      <View style={styles.vBox}>
+      <View style={styles.container}>
         <View style={styles.hBoxStretch}>
           <Swiper
             cards={images}
@@ -72,7 +72,7 @@ export class SwipeScreen extends React.Component {
 
         <View style={styles.vBox}>
           <Slider
-            style={(styles.hBox, {width: 200, height: 40})}
+            style={{width: 200, height: 20}}
             minimumValue={100}
             maximumValue={1000}
             minimumTrackTintColor="#555087"
@@ -83,35 +83,44 @@ export class SwipeScreen extends React.Component {
           <Text style={styles.smallText}>{this.state.zoomPercentage}%</Text>
         </View>
         <View style={styles.hBox}>
-          <TouchableOpacity style={{margin: 20}}>
-            <Icon name="cards" size={40} color="#900" />
+          <TouchableOpacity>
+            <Icon name="cards" size={40} color="#555087" />
           </TouchableOpacity>
-          <TouchableOpacity style={{margin: 20}}>
-            <Icon name="image-move" size={40} color="#900" />
-          </TouchableOpacity>
-          <TouchableOpacity style={{margin: 20}}>
-            <Icon name="cards" size={40} color="#900" />
+          <TouchableOpacity style={{marginLeft: 20}}>
+            <Icon name="image-move" size={40} color="#555087" />
           </TouchableOpacity>
         </View>
+        <Icon
+          style={{margin: 0}}
+          name="circle-small"
+          size={20}
+          color="#555087"
+        />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 50,
+  },
   vBox: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    backgroundColor: 'blue',
   },
   hBox: {
-    flex: 1,
+    flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
     backgroundColor: 'red',
   },
   hBoxStretch: {
