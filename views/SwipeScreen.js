@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import Swiper from 'react-native-deck-swiper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -82,9 +83,15 @@ export class SwipeScreen extends React.Component {
           <Text style={styles.smallText}>{this.state.zoomPercentage}%</Text>
         </View>
         <View style={styles.hBox}>
-          <TouchableOpacity></TouchableOpacity>
-          <TouchableOpacity></TouchableOpacity>
-          <TouchableOpacity></TouchableOpacity>
+          <TouchableOpacity style={{margin: 20}}>
+            <Icon name="cards" size={40} color="#900" />
+          </TouchableOpacity>
+          <TouchableOpacity style={{margin: 20}}>
+            <Icon name="image-move" size={40} color="#900" />
+          </TouchableOpacity>
+          <TouchableOpacity style={{margin: 20}}>
+            <Icon name="cards" size={40} color="#900" />
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -104,7 +111,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 10,
     backgroundColor: 'red',
   },
   hBoxStretch: {

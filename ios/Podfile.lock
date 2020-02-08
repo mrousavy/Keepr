@@ -235,6 +235,8 @@ PODS:
     - React
   - RNScreens (2.0.0-beta.2):
     - React
+  - RNVectorIcons (6.6.0):
+    - React
   - RSKImageCropper (2.2.3)
   - Yoga (1.14.0)
 
@@ -274,6 +276,7 @@ DEPENDENCIES:
   - RNCustomizedImagePicker (from `../node_modules/react-native-customized-image-picker`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - RSKImageCropper
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -347,6 +350,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -384,9 +389,10 @@ SPEC CHECKSUMS:
   RNCustomizedImagePicker: 0311b7bd61302b112cb6f1c9179d1105b475d0cc
   RNGestureHandler: 911d3b110a7a233a34c4f800e7188a84b75319c6
   RNScreens: 5e4758109c6d35f9a009ce72af873df907548020
+  RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 0a53331d957047b370776168c31996294715ec48
+PODFILE CHECKSUM: 14fde56673bfd9a203fd1a29de9fd66d7203afa0
 
 COCOAPODS: 1.8.4

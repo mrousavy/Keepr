@@ -2,6 +2,9 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {PickImagesScreen} from './views/PickImagesScreen';
 import {SwipeScreen} from './views/SwipeScreen';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+Icon.loadFont();
 
 const MainNavigator = createStackNavigator(
   {
