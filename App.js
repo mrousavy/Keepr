@@ -9,11 +9,56 @@ const MainNavigator = createStackNavigator(
     Swipe: {screen: SwipeScreen},
   },
   {
-    initialRouteName: 'PickImages',
-    // initialRouteParams: {images: [{"height": 2848, "mime": "image/jpeg", "uri": "/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/4659D401-00A8-47E6-A907-B4A6C7DB9450/tmp/react-native-customized-image-picker/47778928-C69B-4433-9E45-0B43EAA4D78F.jpg", "width": 4288}, {"height": 2002, "mime": "image/jpeg", "uri": "/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/4659D401-00A8-47E6-A907-B4A6C7DB9450/tmp/react-native-customized-image-picker/5A690AA0-F34A-4B58-9038-6B2E898CE71E.jpg", "width": 3000}, {"height": 2500, "mime": "image/jpeg", "uri": "/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/4659D401-00A8-47E6-A907-B4A6C7DB9450/tmp/react-native-customized-image-picker/7A5FEDDA-D538-4857-B9C4-767A553179DE.jpg", "width": 1668}, {"height": 2848, "mime": "image/jpeg", "uri": "/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/4659D401-00A8-47E6-A907-B4A6C7DB9450/tmp/react-native-customized-image-picker/77590DEA-A814-4F84-BAE7-3072E90514B3.jpg", "width": 4288}, {"height": 2002, "mime": "image/jpeg", "uri": "/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/4659D401-00A8-47E6-A907-B4A6C7DB9450/tmp/react-native-customized-image-picker/31F1B09C-D274-4533-8E9D-DD0583F22E83.jpg", "width": 3000}, {"height": 3024, "mime": "image/jpeg", "uri": "/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/4659D401-00A8-47E6-A907-B4A6C7DB9450/tmp/react-native-customized-image-picker/F5C7986C-1A4C-4816-B6F3-1951CC871117.jpg", "width": 4032}]},
-    // defaultNavigationOptions: {
-    //   gestureEnabled: false
-    // }
+    initialRouteName: 'Swipe',
+    initialRouteParams: {
+      images: [
+        {
+          height: 2500,
+          mime: 'image/jpeg',
+          uri:
+            '/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/70A540A8-2CE3-4C97-A874-D9E6865758A6/tmp/react-native-customized-image-picker/69334B89-6256-4385-8758-D0A1E5EDDE32.jpg',
+          width: 1668,
+        },
+        {
+          height: 2848,
+          mime: 'image/jpeg',
+          uri:
+            '/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/70A540A8-2CE3-4C97-A874-D9E6865758A6/tmp/react-native-customized-image-picker/EB1737EC-C99B-46C8-949C-86E72C94653F.jpg',
+          width: 4288,
+        },
+        {
+          height: 2002,
+          mime: 'image/jpeg',
+          uri:
+            '/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/70A540A8-2CE3-4C97-A874-D9E6865758A6/tmp/react-native-customized-image-picker/A7A8714D-770A-4EAF-8154-B256E254CC21.jpg',
+          width: 3000,
+        },
+        {
+          height: 2848,
+          mime: 'image/jpeg',
+          uri:
+            '/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/70A540A8-2CE3-4C97-A874-D9E6865758A6/tmp/react-native-customized-image-picker/0F3BECF3-EE2A-4F5E-9E46-0CC138A86D83.jpg',
+          width: 4288,
+        },
+        {
+          height: 2002,
+          mime: 'image/jpeg',
+          uri:
+            '/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/70A540A8-2CE3-4C97-A874-D9E6865758A6/tmp/react-native-customized-image-picker/A3A80812-72F1-463D-A45B-AA4ADA6FD381.jpg',
+          width: 3000,
+        },
+        {
+          height: 3024,
+          mime: 'image/jpeg',
+          uri:
+            '/Users/mrousavy/Library/Developer/CoreSimulator/Devices/20752FBC-3424-4462-B44F-73541CB46F9B/data/Containers/Data/Application/70A540A8-2CE3-4C97-A874-D9E6865758A6/tmp/react-native-customized-image-picker/AAF260ED-5449-4343-8E94-C2D937D26984.jpg',
+          width: 4032,
+        },
+      ],
+    },
+    defaultNavigationOptions: {
+      gestureEnabled: false,
+    },
   },
 );
 

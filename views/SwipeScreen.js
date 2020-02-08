@@ -30,35 +30,42 @@ export class SwipeScreen extends React.Component {
   };
   render() {
     const {images} = this.props.navigation.state.params;
+    console.log(images);
     return (
       <View style={styles.vBox}>
-        <Swiper
-          cards={images}
-          backgroundColor="transparent"
-          marginTop={50}
-          renderCard={(image, key) => {
-            return (
-              <View
-                key={key}
-                style={(styles.card, {width: cardWidth, height: cardHeight})}>
-                <Image
-                  source={image}
-                  style={{
-                    width: cardWidth,
-                    height: cardHeight,
-                    borderRadius: 5,
-                  }}></Image>
-              </View>
-            );
-          }}
-          onSwiped={cardIndex => {
-            console.log(cardIndex);
-          }}
-          onSwipedAll={() => {
-            console.log('onSwipedAll');
-          }}
-          cardIndex={0}
-          stackSize={images.length}></Swiper>
+        <View style={styles.hBoxStretch}>
+          <Swiper
+            cards={images}
+            backgroundColor="transparent"
+            marginTop={50}
+            animateCardOpacity={true}
+            childrenOnTop={true}
+            useViewOverflow={false}
+            renderCard={(image, key) => {
+              return (
+                <View
+                  key={key}
+                  style={(styles.card, {width: cardWidth, height: cardHeight})}>
+                  <Image
+                    source={image}
+                    style={{
+                      width: cardWidth,
+                      height: cardHeight,
+                      borderRadius: 5,
+                    }}></Image>
+                </View>
+              );
+            }}
+            onSwiped={cardIndex => {
+              console.log(cardIndex);
+            }}
+            onSwipedAll={() => {
+              console.log('onSwipedAll');
+            }}
+            cardIndex={0}
+            stackSize={images.length}></Swiper>
+        </View>
+
         <Slider
           style={{width: 200, height: 40}}
           minimumValue={0}
@@ -83,7 +90,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'green',
   },
   hBox: {
     flex: 1,
@@ -93,8 +99,12 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'red',
   },
-  hElement: {
-    justifyContent: 'center',
+  hBoxStretch: {
+    flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    marginLeft: -10,
+    padding: 20,
   },
   card: {
     borderRadius: 5,

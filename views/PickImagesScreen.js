@@ -46,7 +46,6 @@ export class PickImagesScreen extends React.Component {
     })
       .then(images => {
         var mappedImages = images.map(i => {
-          console.log('received image', i);
           return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
         });
         this.props.navigation.navigate('Swipe', {images: mappedImages});
@@ -54,14 +53,6 @@ export class PickImagesScreen extends React.Component {
       .catch(e => {
         console.log(e);
       });
-  }
-
-  imageBrowserCallback(images) {
-    console.log(images);
-  }
-
-  componentDidMount() {
-    console.log('gotta check for permissions');
   }
 }
 
