@@ -10,7 +10,7 @@ import {
   Animated,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
-import Swiper from 'react-native-deck-swiper';
+import CardStack, {Card} from 'react-native-card-stack-swiper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
@@ -56,76 +56,88 @@ export class SwipeScreen extends React.Component {
     console.log(images);
     return (
       <View style={styles.container}>
-        <View style={styles.hBoxStretch}>
-          <Swiper
-            cards={images}
-            backgroundColor="transparent"
-            marginTop={50}
-            animateCardOpacity={true}
-            childrenOnTop={true}
-            useViewOverflow={false}
-            renderCard={(image, key) => {
-              return (
-                <View
-                  key={key}
-                  style={(styles.card, {width: cardWidth, height: cardHeight})}>
-                  <Image
-                    source={image}
-                    style={{
-                      width: cardWidth,
-                      height: cardHeight,
-                      borderRadius: 5,
-                    }}></Image>
-                </View>
-              );
+        <View style={{flex: 8, margin: 50}}>
+          <CardStack
+            renderNoMoreCards={() => (
+              <Text
+                style={{
+                  fontWeight: '700',
+                  fontSize: 18,
+                  color: 'gray',
+                  alignSelf: 'center',
+                }}>
+                done! :)
+              </Text>
+            )}
+            ref={swiper => {
+              this.swiper = swiper;
             }}
-            onSwiped={cardIndex => {
-              console.log(cardIndex);
-            }}
-            onSwipedAll={() => {
-              console.log('onSwipedAll');
-            }}
-            cardIndex={0}
-            stackSize={images.length}></Swiper>
-        </View>
-
-        <View style={styles.vBox}>
-          <Slider
-            style={{width: 200, height: 20}}
-            minimumValue={100}
-            maximumValue={1000}
-            minimumTrackTintColor="#555087"
-            maximumTrackTintColor="#aaaad6"
-            onValueChange={v => this.setState({zoomPercentage: parseInt(v)})}
-            value={this.state.zoomPercentage}
-          />
-          <Text style={styles.smallText}>{this.state.zoomPercentage}%</Text>
-        </View>
-        <View style={styles.hBox}>
-          <TouchableOpacity onPress={() => this.onPressedCards()}>
-            <Icon name="cards" size={40} color="#555087" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{marginLeft: 20}}
-            onPress={() => this.onPressedImages()}>
-            <Icon name="image-move" size={40} color="#555087" />
-          </TouchableOpacity>
-        </View>
-        <Animated.View
-          style={{
-            transform: [
+            onSwiped={() => console.log('onSwiped')}
+            style={[
+              styles.content,
               {
-                translateX: this.state.selectedDotOffset,
+                alignSelf: 'stretch',
+                marginHorizontal: -20,
+                marginTop: 50,
               },
-            ],
-          }}>
-          <Icon
-            style={{margin: 0}}
-            name="circle-small"
-            size={20}
-            color="#555087"
-          />
-        </Animated.View>
+            ]}
+            ref={swiper => {
+              this.swiper = swiper;
+            }}>
+            {images.map((image, index) => (
+              <Card
+                key={image}
+                style={[styles.card, {width: cardWidth, height: cardHeight}]}>
+                <Image
+                  source={image}
+                  style={{
+                    width: cardWidth,
+                    height: cardHeight,
+                    borderRadius: 5,
+                  }}></Image>
+              </Card>
+            ))}
+          </CardStack>
+        </View>
+        <View></View>
+
+        <View style={[styles.overlayCard, {flex: 2}]}>
+          <View style={styles.vBox}>
+            <Slider
+              style={[styles.slider, {flex: 1}]}
+              minimumValue={100}
+              maximumValue={1000}
+              minimumTrackTintColor="#555087"
+              maximumTrackTintColor="#aaaad6"
+              onValueChange={v => this.setState({zoomPercentage: parseInt(v)})}
+              value={this.state.zoomPercentage}
+            />
+            <Text style={[styles.smallText, {flex: 1}]}>
+              {this.state.zoomPercentage}%
+            </Text>
+            <View style={[styles.hBox, {flex: 1}]}>
+              <TouchableOpacity onPress={() => this.onPressedCards()}>
+                <Icon name="cards" size={40} color="#555087" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{marginLeft: 20}}
+                onPress={() => this.onPressedImages()}>
+                <Icon name="image-move" size={40} color="#555087" />
+              </TouchableOpacity>
+            </View>
+            <Animated.View
+              style={{
+                transform: [
+                  {
+                    translateX: this.state.selectedDotOffset,
+                  },
+                ],
+                flex: 1,
+              }}>
+              <Icon name="circle-small" size={20} color="#555087" />
+            </Animated.View>
+          </View>
+        </View>
       </View>
     );
   }
@@ -136,8 +148,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
-    padding: 50,
+    alignItems: 'stretch',
+    padding: 0,
   },
   vBox: {
     flex: 1,
@@ -146,17 +158,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   hBox: {
-    flex: 0.5,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   hBoxStretch: {
-    flex: 8,
+    flex: 1,
     flexDirection: 'row',
     alignSelf: 'stretch',
-    marginLeft: -40,
     padding: 20,
+  },
+  overlayCard: {
+    borderRadius: 15,
+    shadowColor: 'rgba(0,0,0,0.5)',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.5,
+    backgroundColor: '#ffffff',
+    padding: 10,
+    alignSelf: 'stretch',
   },
   card: {
     borderRadius: 5,
@@ -174,6 +197,11 @@ const styles = StyleSheet.create({
     fontSize: 55,
     fontFamily: 'System',
     color: '#ffffff',
+  },
+  slider: {
+    width: 200,
+    height: 20,
+    margin: 5,
   },
   footer: {
     flex: 1,
