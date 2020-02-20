@@ -55,54 +55,52 @@ export class SwipeScreen extends React.Component {
 
   render() {
     const {images} = this.props.navigation.state.params;
-    const {shownView} = this.state;
+    const {shownView = 0} = this.state;
     console.log(images);
     return (
       <View style={styles.container}>
-        {shownView == 0 && (
-          <View
-            style={{
-              flex: 8,
-              margin: 50,
+        <View
+          style={{
+            flex: 8,
+            margin: 50,
+            display: shownView == 0 ? 'flex' : 'none',
+          }}>
+          <CardStack
+            onSwiped={() => console.log('onSwiped')}
+            style={[
+              styles.content,
+              {
+                alignSelf: 'stretch',
+                marginHorizontal: -20,
+                marginTop: 50,
+              },
+            ]}
+            ref={swiper => {
+              this.swiper = swiper;
             }}>
-            <CardStack
-              onSwiped={() => console.log('onSwiped')}
-              style={[
-                styles.content,
-                {
-                  alignSelf: 'stretch',
-                  marginHorizontal: -20,
-                  marginTop: 50,
-                },
-              ]}
-              ref={swiper => {
-                this.swiper = swiper;
-              }}>
-              {images.map((image, index) => (
-                <Card
-                  key={image}
-                  style={[styles.card, {width: cardWidth, height: cardHeight}]}>
-                  <Image
-                    source={image}
-                    style={{
-                      width: cardWidth,
-                      height: cardHeight,
-                      borderRadius: 5,
-                    }}></Image>
-                </Card>
-              ))}
-            </CardStack>
-          </View>
-        )}
-        {shownView == 1 && (
-          <View
-            style={{
-              flex: 8,
-              margin: 50,
-            }}>
-            <Text>Hello.</Text>
-          </View>
-        )}
+            {images.map((image, index) => (
+              <Card
+                key={image}
+                style={[styles.card, {width: cardWidth, height: cardHeight}]}>
+                <Image
+                  source={image}
+                  style={{
+                    width: cardWidth,
+                    height: cardHeight,
+                    borderRadius: 5,
+                  }}></Image>
+              </Card>
+            ))}
+          </CardStack>
+        </View>
+        <View
+          style={{
+            flex: 8,
+            margin: 50,
+            display: shownView == 1 ? 'flex' : 'none',
+          }}>
+          <Text>Hello.</Text>
+        </View>
 
         <View style={[styles.overlayCard, {flex: 2}]}>
           <View style={styles.vBox}>
