@@ -8,6 +8,7 @@ import {
   Image,
   Dimensions,
   Animated,
+  Easing,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import CardStack, {Card} from 'react-native-card-stack-swiper';
@@ -33,7 +34,8 @@ export class SwipeScreen extends React.Component {
     headerShown: false,
   };
   state = {
-    zoomPercentage: 100,
+    zoomPercentage: new Animated.Value(100),
+    zoomPercentageSlider: 100,
     shownView: 0,
     shownImageIndex: 0,
     selectedDotOffset: new Animated.Value(-30),
@@ -56,8 +58,19 @@ export class SwipeScreen extends React.Component {
     this.slideDot(30);
     this.vibrate();
   }
+  scaleImageToPercent(percent, duration = 500) {
+    Animated.timing(this.state.zoomPercentage, {
+      toValue: percent,
+      duration: duration,
+      easing: Easing.ease,
+    }).start();
+    this.setState({zoomPercentageSlider: percent});
+  }
   imagePressed(evt, index) {
-    console.log(index);
+    if (this.state.zoomPercentage._value > 100) {
+      this.scaleImageToPercent(100);
+      return;
+    }
     const x = evt.nativeEvent.locationX;
     if (x > screenWidth * 0.75) {
       console.log('keep');
@@ -115,7 +128,7 @@ export class SwipeScreen extends React.Component {
               <Card
                 key={`card#${index}`}
                 style={[styles.card, {width: cardWidth, height: cardHeight}]}>
-                <Image
+                <Animated.Image
                   source={image}
                   style={{
                     width: cardWidth,
@@ -123,10 +136,13 @@ export class SwipeScreen extends React.Component {
                     borderRadius: 5,
                     transform: [
                       {
-                        scale: this.state.zoomPercentage / 100,
+                        scale: this.state.zoomPercentage.interpolate({
+                          inputRange: [100, 750],
+                          outputRange: [1, 7.5],
+                        }),
                       },
                     ],
-                  }}></Image>
+                  }}></Animated.Image>
               </Card>
             ))}
           </CardStack>
@@ -148,7 +164,7 @@ export class SwipeScreen extends React.Component {
                     display: shownImageIndex == index ? 'flex' : 'none',
                   }}
                   onPress={evt => this.imagePressed(evt, index)}>
-                  <Image
+                  <Animated.Image
                     source={image}
                     resizeMode="contain"
                     style={{
@@ -158,10 +174,13 @@ export class SwipeScreen extends React.Component {
                       borderRadius: 5,
                       transform: [
                         {
-                          scale: this.state.zoomPercentage / 100,
+                          scale: this.state.zoomPercentage.interpolate({
+                            inputRange: [0, 1000],
+                            outputRange: [0, 10],
+                          }),
                         },
                       ],
-                    }}></Image>
+                    }}></Animated.Image>
                 </TouchableOpacity>
               ),
           )}
@@ -183,13 +202,11 @@ export class SwipeScreen extends React.Component {
                   maximumValue={750}
                   minimumTrackTintColor="#555087"
                   maximumTrackTintColor="#aaaad6"
-                  onValueChange={v =>
-                    this.setState({zoomPercentage: parseInt(v)})
-                  }
-                  value={this.state.zoomPercentage}
+                  onValueChange={v => this.scaleImageToPercent(parseInt(v), 0)}
+                  value={this.state.zoomPercentageSlider}
                 />
                 <Text style={[styles.smallText, {flex: 1}]}>
-                  {this.state.zoomPercentage / 100}x
+                  {this.state.zoomPercentageSlider / 100}x
                 </Text>
               </View>
               <TouchableOpacity
