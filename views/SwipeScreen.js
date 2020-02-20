@@ -34,9 +34,13 @@ export class SwipeScreen extends React.Component {
   };
   state = {
     zoomPercentage: 100,
-    viewIndex: 0,
+    shownView: 0,
+    shownImageIndex: 0,
     selectedDotOffset: new Animated.Value(-30),
   };
+  vibrate() {
+    if (VIBRATE) ReactNativeHapticFeedback.trigger('impactLight');
+  }
   slideDot = offset => {
     Animated.spring(this.state.selectedDotOffset, {
       toValue: offset,
@@ -45,31 +49,34 @@ export class SwipeScreen extends React.Component {
   onPressedCards() {
     this.setState({shownView: 0});
     this.slideDot(-30);
-    if (VIBRATE) ReactNativeHapticFeedback.trigger('impactLight');
+    this.vibrate();
   }
   onPressedImages() {
     this.setState({shownView: 1});
     this.slideDot(30);
-    if (VIBRATE) ReactNativeHapticFeedback.trigger('impactLight');
+    this.vibrate();
   }
-  imagePressed(evt) {
+  imagePressed(evt, index) {
+    console.log(index);
     const x = evt.nativeEvent.locationX;
-    if (x > screenWidth * 0.9) {
+    if (x > screenWidth * 0.75) {
       console.log('keep');
-    } else if (x < screenWidth * 0.1) {
+    } else if (x < screenWidth * 0.25) {
       console.log('delete');
     } else {
       return;
     }
+    this.vibrate();
     this.setState(prevState => ({
-      shownImageIndex: prevState.shownImageIndex + 1,
+      shownImageIndex: parseInt(prevState.shownImageIndex) + 1,
     }));
   }
 
   render() {
     const {images} = this.props.navigation.state.params;
-    const {shownView = 0, shownImageIndex = 0} = this.state;
+    const {shownView, shownImageIndex} = this.state;
     console.log(images);
+    console.log(`${shownImageIndex} == ${0}`);
     return (
       <View style={styles.container}>
         <View
@@ -113,26 +120,28 @@ export class SwipeScreen extends React.Component {
             marginBottom: 50,
             display: shownView == 1 ? 'flex' : 'none',
           }}>
-          {images.map((image, index) => (
-            <TouchableOpacity
-              key={`image#${index}`}
-              activeOpacity={0.75}
-              style={{
-                display: shownImageIndex == index ? 'flex' : 'none',
-              }}
-              onPress={evt => this.imagePressed(evt)}>
-              <Image
-                source={image}
-                resizeMode="contain"
-                style={{
-                  width: screenWidth * 0.95,
-                  height: screenHeight * 0.65,
-                  marginTop: 50,
-                  alignSelf: 'center',
-                  borderRadius: 5,
-                }}></Image>
-            </TouchableOpacity>
-          ))}
+          {images.map(
+            (image, index) =>
+              shownImageIndex == index && (
+                <TouchableOpacity
+                  key={`image#${index}`}
+                  activeOpacity={0.75}
+                  style={{
+                    display: shownImageIndex == index ? 'flex' : 'none',
+                  }}
+                  onPress={evt => this.imagePressed(evt, index)}>
+                  <Image
+                    source={image}
+                    resizeMode="contain"
+                    style={{
+                      width: screenWidth * 0.95,
+                      height: screenHeight * 0.65,
+                      alignSelf: 'center',
+                      borderRadius: 5,
+                    }}></Image>
+                </TouchableOpacity>
+              ),
+          )}
         </View>
 
         <View style={[styles.overlayCard, {flex: 2}]}>
