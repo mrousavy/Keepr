@@ -61,14 +61,24 @@ export class SwipeScreen extends React.Component {
     const x = evt.nativeEvent.locationX;
     if (x > screenWidth * 0.75) {
       console.log('keep');
-      this.swiper.swipeRight();
+      this.customSwipeRight();
     } else if (x < screenWidth * 0.25) {
       console.log('delete');
-      this.swiper.swipeLeft();
+      this.customSwipeLeft();
     } else {
       return;
     }
     this.vibrate();
+  }
+
+  customSwipeRight() {
+    this.swiper.swipeRight();
+    this.setState(prevState => ({
+      shownImageIndex: parseInt(prevState.shownImageIndex) + 1,
+    }));
+  }
+  customSwipeLeft() {
+    this.swiper.swipeLeft();
     this.setState(prevState => ({
       shownImageIndex: parseInt(prevState.shownImageIndex) + 1,
     }));
@@ -160,8 +170,13 @@ export class SwipeScreen extends React.Component {
         {/* !!!                   BOTTOM CONTROLLER                   !!! */}
         <View style={[styles.overlayCard, {flex: 2}]}>
           <View style={styles.vBox}>
-            <View style={styles.hBox}>
-              <View style={styles.vBox}>
+            <View style={[styles.hBox, {flex: 2}]}>
+              <TouchableOpacity
+                style={{marginLeft: 20}}
+                onPress={() => this.customSwipeLeft()}>
+                <Icon name="delete" size={40} color="rgb(236, 114, 110)" />
+              </TouchableOpacity>
+              <View style={[styles.vBox, {flex: 1}]}>
                 <Slider
                   style={[styles.slider, {flex: 1}]}
                   minimumValue={100}
@@ -177,7 +192,17 @@ export class SwipeScreen extends React.Component {
                   {this.state.zoomPercentage / 100}x
                 </Text>
               </View>
+              <TouchableOpacity
+                style={{marginRight: 20}}
+                onPress={() => this.customSwipeRight()}>
+                <Icon
+                  name="content-save"
+                  size={40}
+                  color="rgb(115, 200, 128)"
+                />
+              </TouchableOpacity>
             </View>
+
             <View style={[styles.hBox, {flex: 1}]}>
               <TouchableOpacity onPress={() => this.onPressedCards()}>
                 <Icon name="cards" size={40} color="#555087" />
