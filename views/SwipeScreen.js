@@ -52,10 +52,23 @@ export class SwipeScreen extends React.Component {
     this.slideDot(30);
     if (VIBRATE) ReactNativeHapticFeedback.trigger('impactLight');
   }
+  imagePressed(evt) {
+    const x = evt.nativeEvent.locationX;
+    if (x > screenWidth * 0.9) {
+      console.log('keep');
+    } else if (x < screenWidth * 0.1) {
+      console.log('delete');
+    } else {
+      return;
+    }
+    this.setState(prevState => ({
+      shownImageIndex: prevState.shownImageIndex + 1,
+    }));
+  }
 
   render() {
     const {images} = this.props.navigation.state.params;
-    const {shownView = 0} = this.state;
+    const {shownView = 0, shownImageIndex = 0} = this.state;
     console.log(images);
     return (
       <View style={styles.container}>
@@ -80,7 +93,7 @@ export class SwipeScreen extends React.Component {
             }}>
             {images.map((image, index) => (
               <Card
-                key={image}
+                key={`card#${index}`}
                 style={[styles.card, {width: cardWidth, height: cardHeight}]}>
                 <Image
                   source={image}
@@ -96,10 +109,30 @@ export class SwipeScreen extends React.Component {
         <View
           style={{
             flex: 8,
-            margin: 50,
+            marginTop: 50,
+            marginBottom: 50,
             display: shownView == 1 ? 'flex' : 'none',
           }}>
-          <Text>Hello.</Text>
+          {images.map((image, index) => (
+            <TouchableOpacity
+              key={`image#${index}`}
+              activeOpacity={0.75}
+              style={{
+                display: shownImageIndex == index ? 'flex' : 'none',
+              }}
+              onPress={evt => this.imagePressed(evt)}>
+              <Image
+                source={image}
+                resizeMode="contain"
+                style={{
+                  width: screenWidth * 0.95,
+                  height: screenHeight * 0.65,
+                  marginTop: 50,
+                  alignSelf: 'center',
+                  borderRadius: 5,
+                }}></Image>
+            </TouchableOpacity>
+          ))}
         </View>
 
         <View style={[styles.overlayCard, {flex: 2}]}>
