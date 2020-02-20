@@ -59,9 +59,9 @@ const MainNavigator = createStackNavigator(
     //     },
     //   ],
     // },
-    // defaultNavigationOptions: {
-    //   gestureEnabled: false,
-    // },
+    defaultNavigationOptions: {
+      gestureEnabled: false,
+    },
   },
 );
 
