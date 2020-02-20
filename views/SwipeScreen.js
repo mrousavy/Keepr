@@ -61,8 +61,10 @@ export class SwipeScreen extends React.Component {
     const x = evt.nativeEvent.locationX;
     if (x > screenWidth * 0.75) {
       console.log('keep');
+      this.swiper.swipeRight();
     } else if (x < screenWidth * 0.25) {
       console.log('delete');
+      this.swiper.swipeLeft();
     } else {
       return;
     }
@@ -79,6 +81,7 @@ export class SwipeScreen extends React.Component {
     console.log(`${shownImageIndex} == ${0}`);
     return (
       <View style={styles.container}>
+        {/* !!                     TINDER CARD STACK                       !!! */}
         <View
           style={{
             flex: 8,
@@ -108,16 +111,21 @@ export class SwipeScreen extends React.Component {
                     width: cardWidth,
                     height: cardHeight,
                     borderRadius: 5,
+                    transform: [
+                      {
+                        scale: this.state.zoomPercentage / 100,
+                      },
+                    ],
                   }}></Image>
               </Card>
             ))}
           </CardStack>
         </View>
+        {/* !!!                   IMAGE TAP STACK                   !!! */}
         <View
           style={{
             flex: 8,
-            marginTop: 50,
-            marginBottom: 50,
+            marginVertical: 50,
             display: shownView == 1 ? 'flex' : 'none',
           }}>
           {images.map(
@@ -138,26 +146,38 @@ export class SwipeScreen extends React.Component {
                       height: screenHeight * 0.65,
                       alignSelf: 'center',
                       borderRadius: 5,
+                      transform: [
+                        {
+                          scale: this.state.zoomPercentage / 100,
+                        },
+                      ],
                     }}></Image>
                 </TouchableOpacity>
               ),
           )}
         </View>
 
+        {/* !!!                   BOTTOM CONTROLLER                   !!! */}
         <View style={[styles.overlayCard, {flex: 2}]}>
           <View style={styles.vBox}>
-            <Slider
-              style={[styles.slider, {flex: 1}]}
-              minimumValue={100}
-              maximumValue={1000}
-              minimumTrackTintColor="#555087"
-              maximumTrackTintColor="#aaaad6"
-              onValueChange={v => this.setState({zoomPercentage: parseInt(v)})}
-              value={this.state.zoomPercentage}
-            />
-            <Text style={[styles.smallText, {flex: 1}]}>
-              {this.state.zoomPercentage}%
-            </Text>
+            <View style={styles.hBox}>
+              <View style={styles.vBox}>
+                <Slider
+                  style={[styles.slider, {flex: 1}]}
+                  minimumValue={100}
+                  maximumValue={750}
+                  minimumTrackTintColor="#555087"
+                  maximumTrackTintColor="#aaaad6"
+                  onValueChange={v =>
+                    this.setState({zoomPercentage: parseInt(v)})
+                  }
+                  value={this.state.zoomPercentage}
+                />
+                <Text style={[styles.smallText, {flex: 1}]}>
+                  {this.state.zoomPercentage / 100}x
+                </Text>
+              </View>
+            </View>
             <View style={[styles.hBox, {flex: 1}]}>
               <TouchableOpacity onPress={() => this.onPressedCards()}>
                 <Icon name="cards" size={40} color="#555087" />
