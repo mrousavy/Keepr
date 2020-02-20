@@ -40,6 +40,8 @@ export class SwipeScreen extends React.Component {
     shownImageIndex: 0,
     selectedDotOffset: new Animated.Value(-30),
   };
+  imagesIndexMemory = [];
+
   vibrate() {
     if (VIBRATE) ReactNativeHapticFeedback.trigger('impactLight');
   }
@@ -58,7 +60,7 @@ export class SwipeScreen extends React.Component {
     this.slideDot(30);
     this.vibrate();
   }
-  scaleImageToPercent(percent, duration = 500) {
+  scaleImageToPercent(percent, duration = 300) {
     Animated.timing(this.state.zoomPercentage, {
       toValue: percent,
       duration: duration,
@@ -67,6 +69,7 @@ export class SwipeScreen extends React.Component {
     this.setState({zoomPercentageSlider: percent});
   }
   imagePressed(evt, index) {
+    this.vibrate();
     if (this.state.zoomPercentage._value > 100) {
       this.scaleImageToPercent(100);
       return;
@@ -74,24 +77,22 @@ export class SwipeScreen extends React.Component {
     const x = evt.nativeEvent.locationX;
     if (x > screenWidth * 0.75) {
       console.log('keep');
-      this.customSwipeRight();
+      this.swiper.swipeRight();
     } else if (x < screenWidth * 0.25) {
       console.log('delete');
-      this.customSwipeLeft();
+      this.swiper.swipeLeft();
     } else {
       return;
     }
-    this.vibrate();
   }
-
-  customSwipeRight() {
-    this.swiper.swipeRight();
+  cardSwipedRight(index) {
+    console.log(`swiped right: ${index}`);
     this.setState(prevState => ({
       shownImageIndex: parseInt(prevState.shownImageIndex) + 1,
     }));
   }
-  customSwipeLeft() {
-    this.swiper.swipeLeft();
+  cardSwipedLeft(index) {
+    console.log(`swiped left: ${index}`);
     this.setState(prevState => ({
       shownImageIndex: parseInt(prevState.shownImageIndex) + 1,
     }));
@@ -112,7 +113,10 @@ export class SwipeScreen extends React.Component {
             display: shownView == 0 ? 'flex' : 'none',
           }}>
           <CardStack
-            onSwiped={() => console.log('onSwiped')}
+            disableBottomSwipe={true}
+            disableTopSwipe={true}
+            onSwipedLeft={index => this.cardSwipedLeft(index)}
+            onSwipedRight={index => this.cardSwipedRight(index)}
             style={[
               styles.content,
               {
@@ -192,7 +196,7 @@ export class SwipeScreen extends React.Component {
             <View style={[styles.hBox, {flex: 2}]}>
               <TouchableOpacity
                 style={{marginLeft: 20}}
-                onPress={() => this.customSwipeLeft()}>
+                onPress={() => this.swiper.swipeLeft()}>
                 <Icon name="delete" size={40} color="rgb(236, 114, 110)" />
               </TouchableOpacity>
               <View style={[styles.vBox, {flex: 1}]}>
@@ -211,7 +215,7 @@ export class SwipeScreen extends React.Component {
               </View>
               <TouchableOpacity
                 style={{marginRight: 20}}
-                onPress={() => this.customSwipeRight()}>
+                onPress={() => this.swiper.swipeRight()}>
                 <Icon
                   name="content-save"
                   size={40}
