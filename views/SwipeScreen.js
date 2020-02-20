@@ -90,12 +90,21 @@ export class SwipeScreen extends React.Component {
     this.setState(prevState => ({
       shownImageIndex: parseInt(prevState.shownImageIndex) + 1,
     }));
+    if (index == this.props.navigation.state.params.images.length - 1) {
+      this.finalize();
+    }
   }
   cardSwipedLeft(index) {
     console.log(`swiped left: ${index}`);
     this.setState(prevState => ({
       shownImageIndex: parseInt(prevState.shownImageIndex) + 1,
     }));
+    if (index == this.props.navigation.state.params.images.length - 1) {
+      this.finalize();
+    }
+  }
+  finalize() {
+    console.log('last one swiped');
   }
 
   render() {
@@ -113,6 +122,7 @@ export class SwipeScreen extends React.Component {
             display: shownView == 0 ? 'flex' : 'none',
           }}>
           <CardStack
+            renderNoMoreCards={() => {}}
             disableBottomSwipe={true}
             disableTopSwipe={true}
             onSwipedLeft={index => this.cardSwipedLeft(index)}
