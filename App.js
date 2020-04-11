@@ -1,5 +1,6 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import {HomeScreen} from './views/HomeScreen';
 import {PickImagesScreen} from './views/PickImagesScreen';
 import {SwipeScreen} from './views/SwipeScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -10,9 +11,10 @@ const MainNavigator = createStackNavigator(
   {
     PickImages: {screen: PickImagesScreen},
     Swipe: {screen: SwipeScreen},
+    Home: {screen: HomeScreen}
   },
   {
-    initialRouteName: 'PickImages',
+    initialRouteName: 'Home',
     // initialRouteParams: {
     //   images: [
     //     {
