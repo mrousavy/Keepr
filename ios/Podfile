@@ -47,6 +47,8 @@ target 'Keepr' do
 
   pod 'RNReactNativeHapticFeedback', :path => '../node_modules/react-native-haptic-feedback'
 
+  pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
+
   target 'KeeprTests' do
     inherit! :search_paths
     # Pods for testing
