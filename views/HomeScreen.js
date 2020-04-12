@@ -44,13 +44,25 @@ export class HomeScreen extends React.Component {
                       new Date(key).toLocaleDateString('de-AT')}
                   </Text>
                   <View style={styles.cardImageContainer}>
-                    {photoshoot.map((photo, photoId) => (
-                      <Image
-                        key={photoId}
-                        style={styles.cardImage}
-                        source={{uri: photo.node.image.uri}}
-                      />
-                    ))}
+                    {photoshoot.map((photo, photoId) => {
+                      const visiblePhotos = 5;
+
+                      if (photoId < visiblePhotos) {
+                        return (
+                          <Image
+                            key={photoId}
+                            style={styles.cardImage}
+                            source={{uri: photo.node.image.uri}}
+                          />
+                        );
+                      } else if (photoId === visiblePhotos) {
+                        return (
+                          <Text
+                            style={styles.cardImage}>{`+${photoshoot.length -
+                            visiblePhotos} more`}</Text>
+                        );
+                      }
+                    })}
                   </View>
                   <Button
                     title="Go to Collection"
@@ -75,33 +87,31 @@ export class HomeScreen extends React.Component {
     console.log(`Selected collection "${key}"`);
   };
 
-  loadPhotos = () => {
-    CameraRoll.getPhotos({
-      first: 50,
-    }).then(r => {
-      let cameraRoll = r.edges;
+  loadPhotos = async () => {
+    let {edges: cameraRoll} = await CameraRoll.getPhotos({first: 50});
+    let albums = await CameraRoll.getAlbums();
+    console.log(albums);
 
-      // A helper function to create a JavaScript Date from a timestamp
-      let toDate = timestamp => new Date(timestamp * 1000);
-      // A helper function to create a JavaScript Date from a timestamp, omitting hours, minutes, seconds and miliseconds
-      let toDay = timestamp => {
-        let day = toDate(timestamp);
-        day.setHours(0, 0, 0, 0);
-        return day;
-      };
+    // A helper function to create a JavaScript Date from a timestamp
+    let toDate = timestamp => new Date(timestamp * 1000);
+    // A helper function to create a JavaScript Date from a timestamp, omitting hours, minutes, seconds and miliseconds
+    let toDay = timestamp => {
+      let day = toDate(timestamp);
+      day.setHours(0, 0, 0, 0);
+      return day;
+    };
 
-      // Group photos by day and add them to photoshoots object
-      let photoshoots = {};
-      cameraRoll.map(crPhoto => {
-        let day = toDay(crPhoto.node.timestamp);
-        // Photoshoots are identified by a UTC-Day string
-        photoshoots[day] = cameraRoll.filter(photo => {
-          return toDay(photo.node.timestamp).getTime() === day.getTime();
-        });
+    // Group photos by day and add them to photoshoots object
+    let photoshoots = {};
+    cameraRoll.map(crPhoto => {
+      let day = toDay(crPhoto.node.timestamp);
+      // Photoshoots are identified by a UTC-Day string
+      photoshoots[day] = cameraRoll.filter(photo => {
+        return toDay(photo.node.timestamp).getTime() === day.getTime();
       });
-
-      this.setState({photoshoots: photoshoots});
     });
+
+    this.setState({photoshoots: photoshoots});
   };
 }
 
