@@ -36,7 +36,10 @@ export class HomeScreen extends React.Component {
               const visibleTiles = 9;
 
               return (
-                <View style={styles.card} key={key}>
+                <View
+                  style={styles.card}
+                  key={key}
+                  onPress={() => this._onSelectCollection(key)}>
                   <View style={styles.cardImages}>
                     {collection.slice(0, visibleTiles).map((photo, photoId) => {
                       let visiblePhotos = visibleTiles - 1;
@@ -72,14 +75,13 @@ export class HomeScreen extends React.Component {
                     blurAmount={25}
                     reducedTransparencyFallbackColor="white">
                     <Text style={styles.cardTitle}>
-                      {'collection at ' +
+                      {'Collection from ' +
                         new Date(key).toLocaleDateString('de-AT')}
                     </Text>
-                    <Button
-                      title="Go to Collection"
-                      style={styles.cardButton}
-                      onPress={() => this._onSelectCollection(key)}
-                    />
+                    <Text style={styles.cardText}>
+                      "You've made quite a few images that day. Start sorting
+                      out your photos! ..."
+                    </Text>
                   </BlurView>
                 </View>
               );
@@ -187,6 +189,11 @@ const styles = StyleSheet.create({
     height: 20,
     fontSize: 20,
     fontWeight: '500',
+    color: 'white',
   },
-  cardButton: {},
+  cardText: {
+    marginTop: 20,
+    marginBottom: 10,
+    color: 'white',
+  },
 });
