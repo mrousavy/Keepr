@@ -8,6 +8,7 @@ import {
   Button,
   FlatList,
 } from 'react-native';
+import {BlurView, VibrancyView} from '@react-native-community/blur';
 import CameraRoll from '@react-native-community/cameraroll';
 import Colors from '../styles/Colors';
 
@@ -62,11 +63,22 @@ export class HomeScreen extends React.Component {
                       }
                     })}
                   </View>
-                  <Button
-                    title="Go to Collection"
-                    style={styles.cardButton}
-                    onPress={this._onSelectCollection}
-                  />
+
+                  <BlurView
+                    style={styles.cardInfo}
+                    blurType="light"
+                    blurAmount={25}
+                    reducedTransparencyFallbackColor="white">
+                    <Text style={styles.cardTitle}>
+                      {'collection at ' +
+                        new Date(key).toLocaleDateString('de-AT')}
+                    </Text>
+                    <Button
+                      title="Go to Collection"
+                      style={styles.cardButton}
+                      onPress={() => this._onSelectCollection(key)}
+                    />
+                  </BlurView>
                 </View>
               );
             }}

@@ -49,6 +49,8 @@ target 'Keepr' do
 
   pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
 
+  pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
+
   target 'KeeprTests' do
     inherit! :search_paths
     # Pods for testing

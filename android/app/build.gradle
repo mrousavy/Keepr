@@ -187,6 +187,7 @@ android {
 }
 
 dependencies {
+    implementation project(':@react-native-community_blur')
     implementation project(':@react-native-community_cameraroll')
     implementation project(':react-native-haptic-feedback')
     implementation project(':react-native-vector-icons')

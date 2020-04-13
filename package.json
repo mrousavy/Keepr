@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/blur": "^3.6.0",
     "@react-native-community/cameraroll": "^1.5.2",
     "@react-native-community/masked-view": "^0.1.8",
     "@react-native-community/slider": "^2.0.8",
