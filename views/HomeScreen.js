@@ -3,22 +3,18 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Image,
   SafeAreaView,
   Button,
   FlatList,
 } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll';
+import Colors from '../styles/Colors';
 
 export class HomeScreen extends React.Component {
   state = {
     photoshoots: [],
   };
-  static navigationOptions = {
-    headerShown: false,
-  };
-  scrollView = React.createRef();
 
   render() {
     const photoshoots = this.state.photoshoots;
@@ -44,7 +40,7 @@ export class HomeScreen extends React.Component {
                       new Date(key).toLocaleDateString('de-AT')}
                   </Text>
                   <View style={styles.cardImageContainer}>
-                    {photoshoot.map((photo, photoId) => {
+                    {photoshoot.slice(0, 6).map((photo, photoId) => {
                       const visiblePhotos = 5;
 
                       if (photoId < visiblePhotos) {
@@ -58,8 +54,10 @@ export class HomeScreen extends React.Component {
                       } else if (photoId === visiblePhotos) {
                         return (
                           <Text
-                            style={styles.cardImage}>{`+${photoshoot.length -
-                            visiblePhotos} more`}</Text>
+                            key={'more'}
+                            style={[styles.cardImage, styles.cardMoreButton]}>
+                            {`+${photoshoot.length - visiblePhotos} more`}
+                          </Text>
                         );
                       }
                     })}
@@ -67,14 +65,13 @@ export class HomeScreen extends React.Component {
                   <Button
                     title="Go to Collection"
                     style={styles.cardButton}
-                    onPress={this._onSelectColletion}
+                    onPress={this._onSelectCollection}
                   />
                 </View>
               );
             }}
           />
         </View>
-        <Text style={styles.smallText}>an app by mrousavy.</Text>
       </SafeAreaView>
     );
   }
@@ -83,7 +80,7 @@ export class HomeScreen extends React.Component {
     this.loadPhotos();
   }
 
-  _onSelectColletion = key => {
+  _onSelectCollection = key => {
     console.log(`Selected collection "${key}"`);
   };
 
@@ -115,9 +112,13 @@ export class HomeScreen extends React.Component {
   };
 }
 
+const cardImageSize = (count, margin) => (100 - count * margin * 2) / count;
+const cardImageMargin = 2;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.bg,
   },
   cardContainer: {
     flex: 1,
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
       height: 1,
     },
     shadowOpacity: 0.5,
-    backgroundColor: '#DEDEDE',
+    backgroundColor: Colors.bgDark,
   },
   cardTitle: {
     height: 20,
@@ -154,22 +155,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     // maxHeight: `${100 - 12}%`,
-    backgroundColor: '#DEDEDE',
     paddingVertical: 10,
   },
   cardImage: {
     flexGrow: 1,
     flexShrink: 1,
-    flexBasis: `${(100 - 12) / 3}%`,
-    height: 100,
-    margin: 2,
-    borderRadius: 5,
+    // Maximum 3 items per row
+    width: cardImageSize(3, cardImageMargin) + '%',
+    height: 0,
+    aspectRatio: 1,
+    margin: cardImageMargin,
+    borderRadius: 2,
     shadowColor: 'rgba(0,0,0,0.5)',
     shadowOffset: {
       width: 0,
       height: 1,
     },
     shadowOpacity: 0.5,
+  },
+  cardMoreButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    backgroundColor: Colors.bgDarker,
+    overflow: 'hidden',
   },
   cardButton: {
     textAlign: 'right',
