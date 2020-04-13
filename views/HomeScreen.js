@@ -14,11 +14,11 @@ import Colors from '../styles/Colors';
 
 export class HomeScreen extends React.Component {
   state = {
-    photoshoots: [],
+    collections: [],
   };
 
   render() {
-    const photoshoots = this.state.photoshoots;
+    const collections = this.state.collections;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -29,38 +29,40 @@ export class HomeScreen extends React.Component {
             ListEmptyComponent={
               <Text>There are no images in your Camera Roll</Text>
             }
-            data={Object.entries(photoshoots)}
+            data={Object.entries(collections)}
             renderItem={({item}) => {
               const key = item[0];
-              const photoshoot = item[1];
+              const collection = item[1];
+              const visibleTiles = 9;
 
               return (
                 <View style={styles.card} key={key}>
-                  <Text style={styles.cardTitle}>
-                    {'Photoshoot at ' +
-                      new Date(key).toLocaleDateString('de-AT')}
-                  </Text>
-                  <View style={styles.cardImageContainer}>
-                    {photoshoot.slice(0, 6).map((photo, photoId) => {
-                      const visiblePhotos = 5;
+                  <View style={styles.cardImages}>
+                    {collection.slice(0, visibleTiles).map((photo, photoId) => {
+                      let visiblePhotos = visibleTiles - 1;
 
-                      if (photoId < visiblePhotos) {
+                      if (photoId <= visiblePhotos) {
                         return (
                           <Image
                             key={photoId}
-                            style={styles.cardImage}
+                            style={styles.cardTile}
                             source={{uri: photo.node.image.uri}}
                           />
                         );
-                      } else if (photoId === visiblePhotos) {
+                      } /* else if (photoId === visiblePhotos) {
                         return (
                           <Text
                             key={'more'}
-                            style={[styles.cardImage, styles.cardMoreButton]}>
-                            {`+${photoshoot.length - visiblePhotos} more`}
+                            style={[
+                              styles.cardTile,
+                              styles.cardMoreButton,
+                              styles.cardImageBorderTop,
+                              styles.cardImageBorderRight,
+                            ]}>
+                            {`+${collection.length - visiblePhotos} more`}
                           </Text>
                         );
-                      }
+                      } */
                     })}
                   </View>
 
@@ -93,13 +95,15 @@ export class HomeScreen extends React.Component {
   }
 
   _onSelectCollection = key => {
-    console.log(`Selected collection "${key}"`);
+    this.props.navigation.navigate('Swipe', {
+      collection: this.state.collections[key],
+      collectionId: key,
+    });
   };
 
   loadPhotos = async () => {
     let {edges: cameraRoll} = await CameraRoll.getPhotos({first: 50});
     let albums = await CameraRoll.getAlbums();
-    console.log(albums);
 
     // A helper function to create a JavaScript Date from a timestamp
     let toDate = timestamp => new Date(timestamp * 1000);
@@ -110,22 +114,22 @@ export class HomeScreen extends React.Component {
       return day;
     };
 
-    // Group photos by day and add them to photoshoots object
-    let photoshoots = {};
+    // Group photos by day and add them to collections object
+    let collections = {};
     cameraRoll.map(crPhoto => {
       let day = toDay(crPhoto.node.timestamp);
-      // Photoshoots are identified by a UTC-Day string
-      photoshoots[day] = cameraRoll.filter(photo => {
+      // collections are identified by a UTC-Day string
+      collections[day] = cameraRoll.filter(photo => {
         return toDay(photo.node.timestamp).getTime() === day.getTime();
       });
     });
 
-    this.setState({photoshoots: photoshoots});
+    this.setState({collections: collections});
   };
 }
 
-const cardImageSize = (count, margin) => (100 - count * margin * 2) / count;
-const cardImageMargin = 2;
+const cardImageSize = (count, margin) => (100 - margin * 2) / count;
+const cardImageMargin = 1;
 
 const styles = StyleSheet.create({
   container: {
@@ -136,20 +140,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column-reverse',
   },
-  smallText: {
-    fontSize: 10,
-    color: 'rgb(150,150,150)',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 10,
-  },
   card: {
     flexDirection: 'column',
-    marginHorizontal: 10,
-    marginTop: 10,
-    padding: 10,
+    marginHorizontal: 20,
+    marginTop: 20,
     overflow: 'hidden',
-    borderRadius: 5,
+    borderRadius: 20,
     shadowColor: 'rgba(0,0,0,0.5)',
     shadowOffset: {
       width: 0,
@@ -158,41 +154,39 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     backgroundColor: Colors.bgDark,
   },
-  cardTitle: {
-    height: 20,
-    fontSize: 20,
-  },
-  cardImageContainer: {
+  cardImages: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    // maxHeight: `${100 - 12}%`,
-    paddingVertical: 10,
+    margin: -cardImageMargin,
   },
-  cardImage: {
+  cardTile: {
     flexGrow: 1,
     flexShrink: 1,
     // Maximum 3 items per row
     width: cardImageSize(3, cardImageMargin) + '%',
     height: 0,
     aspectRatio: 1,
+    borderColor: Colors.text,
     margin: cardImageMargin,
-    borderRadius: 2,
-    shadowColor: 'rgba(0,0,0,0.5)',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.5,
   },
   cardMoreButton: {
+    backgroundColor: Colors.bgDarker,
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    backgroundColor: Colors.bgDarker,
-    overflow: 'hidden',
   },
-  cardButton: {
-    textAlign: 'right',
+  cardInfo: {
+    padding: 10,
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
+  cardTitle: {
+    height: 20,
+    fontSize: 20,
+    fontWeight: '500',
+  },
+  cardButton: {},
 });
