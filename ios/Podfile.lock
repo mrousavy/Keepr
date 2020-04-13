@@ -237,6 +237,8 @@ PODS:
     - React
   - RNReactNativeHapticFeedback (1.9.0):
     - React
+  - RNReanimated (1.8.0):
+    - React
   - RNScreens (2.4.0):
     - React
   - RNVectorIcons (6.6.0):
@@ -281,6 +283,7 @@ DEPENDENCIES:
   - RNCustomizedImagePicker (from `../node_modules/react-native-customized-image-picker`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - RSKImageCropper
@@ -358,6 +361,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNReactNativeHapticFeedback:
     :path: "../node_modules/react-native-haptic-feedback"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNVectorIcons:
@@ -400,6 +405,7 @@ SPEC CHECKSUMS:
   RNCustomizedImagePicker: 0311b7bd61302b112cb6f1c9179d1105b475d0cc
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReactNativeHapticFeedback: 2566b468cc8d0e7bb2f84b23adc0f4614594d071
+  RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
