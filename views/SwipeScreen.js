@@ -43,7 +43,9 @@ export class SwipeScreen extends React.Component {
   imagesIndexMemory = [];
 
   vibrate() {
-    if (VIBRATE) ReactNativeHapticFeedback.trigger('impactLight');
+    if (VIBRATE) {
+      ReactNativeHapticFeedback.trigger('impactLight');
+    }
   }
   slideDot = offset => {
     Animated.spring(this.state.selectedDotOffset, {
@@ -108,7 +110,7 @@ export class SwipeScreen extends React.Component {
   }
 
   render() {
-    const {images} = this.props.navigation.state.params;
+    // const {images} = this.props.navigation.state.params;
     const {shownView, shownImageIndex} = this.state;
     console.log(images);
     console.log(`${shownImageIndex} == ${0}`);
@@ -156,7 +158,8 @@ export class SwipeScreen extends React.Component {
                         }),
                       },
                     ],
-                  }}></Animated.Image>
+                  }}
+                />
               </Card>
             ))}
           </CardStack>
@@ -194,7 +197,8 @@ export class SwipeScreen extends React.Component {
                           }),
                         },
                       ],
-                    }}></Animated.Image>
+                    }}
+                  />
                 </TouchableOpacity>
               ),
           )}
