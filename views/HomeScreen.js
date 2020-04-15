@@ -5,20 +5,19 @@ import {
   View,
   Image,
   SafeAreaView,
-  Button,
   FlatList,
 } from 'react-native';
-import {BlurView, VibrancyView} from '@react-native-community/blur';
-import CameraRoll from '@react-native-community/cameraroll';
+import {BlurView} from '@react-native-community/blur';
 import Colors from '../styles/Colors';
+import PhotoLibrary from '../components/PhotoLibrary';
 
 export class HomeScreen extends React.Component {
   state = {
-    collections: [],
+    photoLibrary: new PhotoLibrary(),
   };
 
   render() {
-    const collections = this.state.collections;
+    const collections = this.state.photoLibrary.collections;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -59,8 +58,6 @@ export class HomeScreen extends React.Component {
                             style={[
                               styles.cardTile,
                               styles.cardMoreButton,
-                              styles.cardImageBorderTop,
-                              styles.cardImageBorderRight,
                             ]}>
                             {`+${collection.length - visiblePhotos} more`}
                           </Text>
@@ -92,8 +89,9 @@ export class HomeScreen extends React.Component {
     );
   }
 
-  componentDidMount() {
-    this.loadPhotos();
+  async componentDidMount() {
+    await this.state.photoLibrary.loadPhotos();
+    await this.state.photoLibrary.createCollections();
   }
 
   _onSelectCollection = key => {
@@ -101,32 +99,6 @@ export class HomeScreen extends React.Component {
       collection: this.state.collections[key],
       collectionId: key,
     });
-  };
-
-  loadPhotos = async () => {
-    let {edges: cameraRoll} = await CameraRoll.getPhotos({first: 50});
-    let albums = await CameraRoll.getAlbums();
-
-    // A helper function to create a JavaScript Date from a timestamp
-    let toDate = timestamp => new Date(timestamp * 1000);
-    // A helper function to create a JavaScript Date from a timestamp, omitting hours, minutes, seconds and miliseconds
-    let toDay = timestamp => {
-      let day = toDate(timestamp);
-      day.setHours(0, 0, 0, 0);
-      return day;
-    };
-
-    // Group photos by day and add them to collections object
-    let collections = {};
-    cameraRoll.map(crPhoto => {
-      let day = toDay(crPhoto.node.timestamp);
-      // collections are identified by a UTC-Day string
-      collections[day] = cameraRoll.filter(photo => {
-        return toDay(photo.node.timestamp).getTime() === day.getTime();
-      });
-    });
-
-    this.setState({collections: collections});
   };
 }
 
