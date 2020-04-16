@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
 import {TransitionPresets} from '@react-navigation/stack';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {HomeScreen} from './HomeScreen';
@@ -44,7 +43,7 @@ export const Home = () => {
       }}
       headerMode="none">
       <SharedElementStack.Screen name="HomeScreen" component={HomeScreen} />
-      <SharedElementStack.Screen
+      {/* <SharedElementStack.Screen
         name="CollectionDetailScreen"
         component={CollectionDetailScreen}
         sharedElementsConfig={(route, otherRoute, showing) => {
@@ -75,7 +74,7 @@ export const Home = () => {
             ];
           }
         }}
-      />
+      /> */}
     </SharedElementStack.Navigator>
   );
 };
