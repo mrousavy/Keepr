@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
-import {SafeAreaView} from 'react-navigation';
+import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
 import Colors from '../../styles/Colors';
 import HomeModel from '../../models/HomeModel';
 import CollectionCard from '../../components/CollectionCard';
@@ -12,24 +11,22 @@ export class HomeScreen extends React.Component {
 
   render() {
     return (
-      <SafeAreaView forceInset={{bottom: 'never'}}>
-        <View style={styles.home}>
-          <FlatList
-            inverted
-            extraData={false}
-            ListEmptyComponent={
-              <Text>There are no images in your Camera Roll</Text>
-            }
-            data={Object.entries(this.state.collections)}
-            renderItem={({item}) => (
-              <CollectionCard
-                item={item}
-                onPress={() => this._onSelectCollection(item[0])}
-              />
-            )}
-          />
-        </View>
-      </SafeAreaView>
+      <View style={styles.home}>
+        <FlatList
+          inverted
+          extraData={false}
+          ListEmptyComponent={
+            <Text>There are no images in your Camera Roll</Text>
+          }
+          data={Object.entries(this.state.collections)}
+          renderItem={({item}) => (
+            <CollectionCard
+              item={item}
+              onPress={() => this._onSelectCollection(item[0])}
+            />
+          )}
+        />
+      </View>
     );
   }
 
