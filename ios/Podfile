@@ -51,6 +51,8 @@ target 'Keepr' do
 
   pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
 
+  pod 'RNSharedElement', :path => '../node_modules/react-native-shared-element'
+
   target 'KeeprTests' do
     inherit! :search_paths
     # Pods for testing
