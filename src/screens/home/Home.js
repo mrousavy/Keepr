@@ -41,7 +41,8 @@ export const Home = () => {
           },
         }),
       }}
-      headerMode="none">
+      headerMode="none"
+      initialRouteName="HomeScreen">
       <SharedElementStack.Screen name="HomeScreen" component={HomeScreen} />
       {/* <SharedElementStack.Screen
         name="CollectionDetailScreen"

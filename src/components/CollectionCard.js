@@ -10,10 +10,7 @@ export default class CollectionCard extends React.Component {
     const visibleTiles = 9;
 
     return (
-      <View
-        style={styles.card}
-        key={key}
-        onPress={() => this._onSelectCollection(key)}>
+      <View style={styles.card} key={key}>
         <View style={styles.images}>
           {collection.slice(0, visibleTiles).map((photo, photoId) => {
             let visiblePhotos = visibleTiles - 1;
@@ -64,14 +61,6 @@ const imageSize = (count, margin) =>
 const imageMargin = 1;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.bg,
-  },
-  cardContainer: {
-    flex: 1,
-    flexDirection: 'column-reverse',
-  },
   card: {
     flexDirection: 'column',
     marginHorizontal: 20,
