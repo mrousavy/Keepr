@@ -22,7 +22,10 @@ export class HomeScreen extends React.Component {
           ListEmptyComponent={
             <Text>There are no images in your Camera Roll</Text>
           }
-          data={Object.entries(this.state.collections)}
+          keyExtractor={(item, index) => {
+            return `collection${index}`;
+          }}
+          data={this.state.collections}
           renderItem={({item}) => (
             <CollectionCard
               item={item}

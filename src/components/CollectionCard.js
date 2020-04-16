@@ -5,14 +5,15 @@ import Colors from '../styles/Colors';
 
 export default class CollectionCard extends React.Component {
   render() {
-    const key = this.props.item[0];
-    const collection = this.props.item[1];
+    const {item} = this.props;
+    console.log(item);
     const visibleTiles = 9;
+    const timestamp = item[0]?.node?.timestamp;
 
     return (
-      <View style={styles.card} key={key}>
+      <View style={styles.card}>
         <View style={styles.images}>
-          {collection.slice(0, visibleTiles).map((photo, photoId) => {
+          {item.map((photo, photoId) => {
             let visiblePhotos = visibleTiles - 1;
 
             if (photoId <= visiblePhotos) {
@@ -44,7 +45,8 @@ export default class CollectionCard extends React.Component {
           blurAmount={25}
           reducedTransparencyFallbackColor="white">
           <Text style={styles.title}>
-            {'Collection from ' + new Date(key).toLocaleDateString('de-AT')}
+            {'Collection from ' +
+              new Date(timestamp).toLocaleDateString('de-AT')}
           </Text>
           <Text style={styles.text}>
             "You've made quite a few images that day. Start sorting out your
