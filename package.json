@@ -14,7 +14,7 @@
     "@react-native-community/cameraroll": "^1.5.2",
     "@react-native-community/masked-view": "^0.1.8",
     "@react-native-community/slider": "^2.0.8",
-    "@react-navigation/native": "^5.0.9",
+    "@react-navigation/native": "^5.1.5",
     "@react-navigation/stack": "^5.1.1",
     "react": "16.9.0",
     "react-native": "0.61.5",
@@ -30,6 +30,7 @@
     "react-native-skeleton-placeholder": "^2.0.1",
     "react-native-vector-icons": "^6.6.0",
     "react-native-view-overflow": "0.0.4",
+    "react-navigation": "^4.3.7",
     "react-navigation-shared-element": "^5.0.0-alpha1",
     "react-navigation-stack": "^2.3.11"
   },
