@@ -13,7 +13,9 @@ export class HomeScreen extends React.Component {
     collections: [],
   };
 
-  render() {
+  async render() {
+    this.load();
+
     return (
       <View style={styles.home}>
         <FlatList
@@ -44,10 +46,6 @@ export class HomeScreen extends React.Component {
     this.setState({
       collections: collections,
     });
-  }
-
-  componentDidMount() {
-    this.load();
   }
 
   _onSelectCollection = key => {
