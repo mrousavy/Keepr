@@ -228,7 +228,7 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/jscallinvoker (= 0.61.5)
-  - RNCMaskedView (0.1.8):
+  - RNCMaskedView (0.1.9):
     - React
   - RNCustomizedImagePicker (0.1.11):
     - QBImagePickerController
@@ -412,7 +412,7 @@ SPEC CHECKSUMS:
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
-  RNCMaskedView: 5dfec94d82b2789c4ae452e15655ae2913cd7491
+  RNCMaskedView: 5dba3cb07493765fb66156c83c3dd281ca709a48
   RNCustomizedImagePicker: 0311b7bd61302b112cb6f1c9179d1105b475d0cc
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReactNativeHapticFeedback: 2566b468cc8d0e7bb2f84b23adc0f4614594d071
