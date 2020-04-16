@@ -1,12 +1,16 @@
 import React from 'react';
 import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
 import Colors from '../../styles/Colors';
-import HomeModel from '../../models/HomeModel';
+import {
+  loadPhotos,
+  loadAlbums,
+  createCollections,
+} from '../../models/HomeModel';
 import CollectionCard from '../../components/CollectionCard';
 
 export class HomeScreen extends React.Component {
   state = {
-    collections: HomeModel.collections,
+    collections: [],
   };
 
   render() {
@@ -30,10 +34,17 @@ export class HomeScreen extends React.Component {
     );
   }
 
-  async componentDidMount() {
-    await HomeModel.loadPhotos();
-    await HomeModel.loadAlbums();
-    await HomeModel.createCollections();
+  async load() {
+    const photos = await loadPhotos();
+    const albums = await loadAlbums();
+    const collections = await createCollections(photos);
+    this.setState({
+      collections: collections,
+    });
+  }
+
+  componentDidMount() {
+    this.load();
   }
 
   _onSelectCollection = key => {

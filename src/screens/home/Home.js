@@ -2,7 +2,6 @@ import React from 'react';
 import {TransitionPresets} from '@react-navigation/stack';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {HomeScreen} from './HomeScreen';
-import {CollectionDetailScreen} from './CollectionDetailScreen';
 
 export const iosTransitionSpec = {
   animation: 'spring',
