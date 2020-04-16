@@ -14,8 +14,6 @@ export class HomeScreen extends React.Component {
   };
 
   async render() {
-    this.load();
-
     return (
       <View style={styles.home}>
         <FlatList
@@ -37,6 +35,10 @@ export class HomeScreen extends React.Component {
         />
       </View>
     );
+  }
+
+  componentDidMount() {
+    this.load();
   }
 
   async load() {
