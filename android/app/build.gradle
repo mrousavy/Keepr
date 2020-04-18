@@ -187,13 +187,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-shared-element')
-    implementation project(':@react-native-community_blur')
-    implementation project(':@react-native-community_cameraroll')
-    implementation project(':react-native-haptic-feedback')
-    implementation project(':react-native-vector-icons')
-    implementation project(':react-native-linear-gradient')
-    implementation project(':react-native-customized-image-picker')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

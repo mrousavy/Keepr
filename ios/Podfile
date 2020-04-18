@@ -34,24 +34,17 @@ target 'Keepr' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RNCustomizedImagePicker', :path => '../node_modules/react-native-customized-image-picker'
 
 	pod 'QBImagePickerController', :path => '../node_modules/react-native-customized-image-picker/ios/QBImagePicker/QBImagePickerController.podspec'
 	pod 'RSKImageCropper'
 	
-  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
 
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'RNReactNativeHapticFeedback', :path => '../node_modules/react-native-haptic-feedback'
 
-  pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
 
-  pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
 
-  pod 'RNSharedElement', :path => '../node_modules/react-native-shared-element'
 
   target 'KeeprTests' do
     inherit! :search_paths
