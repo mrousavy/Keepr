@@ -16,8 +16,12 @@ export async function loadAlbums() : Promise<Album[]> {
 
 export async function createCollections(photos: PhotoIdentifiersPage) : Promise<Collection[]> {
   // Group photos by day and add them to collections object
-
-  return _.toPlainObject(_.groupBy(photos.edges, photo => _toDay(photo.node.timestamp)));
+  let result = _.toPlainObject(_.groupBy(photos.edges, photo => _toDay(photo.node.timestamp)));
+  let collections: Collection[] = [];
+  Object.keys(result).map(key => {
+    collections.push({name: key, photos: result[key]})
+  });
+  return collections;
 }
 
 // A helper function to create a JavaScript Date from a timestamp
