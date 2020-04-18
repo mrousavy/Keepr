@@ -5,14 +5,13 @@ import Colors from '../styles/Colors';
 
 export default class CollectionCard extends React.Component {
   render() {
-    const {item} = this.props;
-    console.log(item);
+    const {item: collection} = this.props;
     const visibleTiles = 9;
 
     return (
       <View style={styles.card}>
         <View style={styles.images}>
-          {item.map((photo, photoId) => {
+          {collection.map((photo, photoId) => {
             let visiblePhotos = visibleTiles - 1;
 
             if (photoId <= visiblePhotos) {

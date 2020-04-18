@@ -1,4 +1,5 @@
 import CameraRoll from '@react-native-community/cameraroll';
+import {groupBy} from 'lodash';
 
 export async function loadPhotos(count = 100) {
   let cameraRoll = await CameraRoll.getPhotos({first: count});
@@ -11,14 +12,23 @@ export async function loadAlbums() {
 
 export async function createCollections(photos) {
   // Group photos by day and add them to collections object
-  return photos.map(cameraRollPhoto => {
-    let day = _toDay(cameraRollPhoto.node.timestamp);
-    // collections are identified by a UTC-Day string
-    return photos.filter(photo => {
-      return _toDay(photo.node.timestamp).getTime() === day.getTime();
-    });
-  });
+  return groupBy(photos, photo => _toDay(photo.timestamp));
+
+  // return photos.map(cameraRollPhoto => {
+  //   let day = _toDay(cameraRollPhoto.node.timestamp);
+  //   // collections are identified by a UTC-Day string
+  //   return photos.filter(photo => {
+  //     return _toDay(photo.node.timestamp).getTime() === day.getTime();
+  //   });
+  // });
 }
+
+let _groupBy = function(xs, key) {
+  return xs.reduce(function(rv, x) {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+};
 
 // A helper function to create a JavaScript Date from a timestamp
 let _toDate = timestamp => new Date(timestamp * 1000);
