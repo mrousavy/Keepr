@@ -8,7 +8,6 @@ export default class CollectionCard extends React.Component {
     const {item} = this.props;
     console.log(item);
     const visibleTiles = 9;
-    const timestamp = item[0]?.node?.timestamp;
 
     return (
       <View style={styles.card}>
@@ -24,18 +23,7 @@ export default class CollectionCard extends React.Component {
                   source={{uri: photo.node.image.uri}}
                 />
               );
-            } /* else if (photoId === visiblePhotos) {
-                        return (
-                          <Text
-                            key={'more'}
-                            style={[
-                              styles.tile,
-                              styles.more,
-                            ]}>
-                            {`+${collection.length - visiblePhotos} more`}
-                          </Text>
-                        );
-                      } */
+            }
           })}
         </View>
 
@@ -45,8 +33,7 @@ export default class CollectionCard extends React.Component {
           blurAmount={25}
           reducedTransparencyFallbackColor="white">
           <Text style={styles.title}>
-            {'Collection from ' +
-              new Date(timestamp).toLocaleDateString('de-AT')}
+            {'Collection from ' + new Date().toLocaleDateString('de-AT')}
           </Text>
           <Text style={styles.text}>
             "You've made quite a few images that day. Start sorting out your
