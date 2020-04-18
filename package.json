@@ -7,7 +7,9 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "chris": "react-native run-ios --device 'Christoph’s iPhone'",
+    "marc": "react-native run-ios --device 'Samsung SmartFridge'"
   },
   "dependencies": {
     "@react-native-community/blur": "^3.6.0",
