@@ -1,15 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, Image, Text} from 'react-native';
+import {View, StyleSheet, Image, Text, GestureResponderEvent} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import Colors from '../styles/Colors';
+import { PhotoIdentifier } from '@react-native-community/cameraroll';
 
-export default class CollectionCard extends React.Component {
+interface Props {
+  item: [string, PhotoIdentifier[]],
+  onPress: (event: GestureResponderEvent) => void
+}
+
+export default class CollectionCard extends React.Component<Props, {}> {
   render() {
-    const {item: collection} = this.props;
+    const [key, collection] = this.props.item;
     const visibleTiles = 9;
 
     return (
-      <View style={styles.card}>
+      <View style={styles.card} key={key}>
         <View style={styles.images}>
           {collection.map((photo, photoId) => {
             let visiblePhotos = visibleTiles - 1;
@@ -44,7 +50,7 @@ export default class CollectionCard extends React.Component {
   }
 }
 
-const imageSize = (count, margin) =>
+const imageSize = (count: number, margin: number) =>
   (100 - margin * count - 2 * margin) / count;
 const imageMargin = 1;
 

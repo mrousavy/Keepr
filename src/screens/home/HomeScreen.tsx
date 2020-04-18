@@ -9,8 +9,15 @@ import {
 import CollectionCard from '../../components/CollectionCard';
 import {BlurView} from '@react-native-community/blur';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
+import { PhotoIdentifier } from '@react-native-community/cameraroll';
+import { Dictionary } from 'lodash';
 
 const STATUSBAR_HEIGHT = getStatusBarHeight();
+
+interface State {
+  collections: Dictionary<PhotoIdentifier[]>,
+}
+
 export class HomeScreen extends React.Component {
   state = {
     collections: [],
