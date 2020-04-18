@@ -7,7 +7,10 @@ import {
   createCollections,
 } from '../../models/HomeModel';
 import CollectionCard from '../../components/CollectionCard';
+import {BlurView} from '@react-native-community/blur';
+import {getStatusBarHeight} from 'react-native-status-bar-height';
 
+const STATUSBAR_HEIGHT = getStatusBarHeight();
 export class HomeScreen extends React.Component {
   state = {
     collections: [],
@@ -32,6 +35,11 @@ export class HomeScreen extends React.Component {
               onPress={() => this._onSelectCollection(item[0])}
             />
           )}
+        />
+        <BlurView
+          blurType="light"
+          blurAmount={10}
+          style={styles.statusBarBlurView}
         />
       </View>
     );
@@ -63,5 +71,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column-reverse',
     backgroundColor: Colors.bg,
+  },
+  statusBarBlurView: {
+    top: 0,
+    height: STATUSBAR_HEIGHT,
+    width: '100%',
+    position: 'absolute',
   },
 });
