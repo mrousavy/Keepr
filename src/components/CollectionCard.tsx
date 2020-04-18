@@ -2,22 +2,23 @@ import React from 'react';
 import {View, StyleSheet, Image, Text, GestureResponderEvent} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import Colors from '../styles/Colors';
-import { PhotoIdentifier } from '@react-native-community/cameraroll';
+import {Collection} from '../models/HomeModel';
+import _ from 'lodash';
 
-interface Props {
-  item: [string, PhotoIdentifier[]],
+type Props = {
+  collection: Collection,
   onPress: (event: GestureResponderEvent) => void
 }
 
 export default class CollectionCard extends React.Component<Props, {}> {
   render() {
-    const [key, collection] = this.props.item;
+    const photos = this.props.collection.photos;
     const visibleTiles = 9;
 
     return (
-      <View style={styles.card} key={key}>
-        <View style={styles.images}>
-          {collection.map((photo, photoId) => {
+      <View style={styles.card}>
+        <View style={styles.photos}>
+          {photos.map((photo, photoId) => {
             let visiblePhotos = visibleTiles - 1;
 
             if (photoId <= visiblePhotos) {
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     backgroundColor: Colors.bgDark,
   },
-  images: {
+  photos: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',

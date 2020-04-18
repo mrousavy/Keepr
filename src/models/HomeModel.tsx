@@ -1,40 +1,30 @@
-import CameraRoll from '@react-native-community/cameraroll';
-import {groupBy} from 'lodash';
+import CameraRoll, { PhotoIdentifier, PhotoIdentifiersPage, Album } from '@react-native-community/cameraroll';
+import _ from 'lodash';
+
+export type Collection = {
+  name: string,
+  photos: PhotoIdentifier[],
+}
 
 export async function loadPhotos(count = 100) {
-  let cameraRoll = await CameraRoll.getPhotos({first: count});
-  return cameraRoll.edges;
+  return await CameraRoll.getPhotos({first: count});
 }
 
-export async function loadAlbums() {
-  return await CameraRoll.getAlbums();
+export async function loadAlbums() : Promise<Album[]> {
+  return await CameraRoll.getAlbums({});
 }
 
-export async function createCollections(photos) {
+export async function createCollections(photos: PhotoIdentifiersPage) : Promise<Collection[]> {
   // Group photos by day and add them to collections object
-  return groupBy(photos, photo => _toDay(photo.timestamp));
 
-  // return photos.map(cameraRollPhoto => {
-  //   let day = _toDay(cameraRollPhoto.node.timestamp);
-  //   // collections are identified by a UTC-Day string
-  //   return photos.filter(photo => {
-  //     return _toDay(photo.node.timestamp).getTime() === day.getTime();
-  //   });
-  // });
+  return _.toPlainObject(_.groupBy(photos.edges, photo => _toDay(photo.node.timestamp)));
 }
-
-let _groupBy = function(xs, key) {
-  return xs.reduce(function(rv, x) {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
-};
 
 // A helper function to create a JavaScript Date from a timestamp
-let _toDate = timestamp => new Date(timestamp * 1000);
+let _toDate = (timestamp: number) => new Date(timestamp * 1000);
 
 // A helper function to create a JavaScript Date from a timestamp, omitting hours, minutes, seconds and miliseconds
-let _toDay = timestamp => {
+let _toDay = (timestamp: number) => {
   let day = _toDate(timestamp);
   day.setHours(0, 0, 0, 0);
   return day;
