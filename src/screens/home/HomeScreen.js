@@ -13,7 +13,7 @@ export class HomeScreen extends React.Component {
     collections: [],
   };
 
-  async render() {
+  render() {
     return (
       <View style={styles.home}>
         <FlatList

@@ -11,8 +11,8 @@ export async function loadAlbums() {
 
 export async function createCollections(photos) {
   // Group photos by day and add them to collections object
-  return photos.map(crPhoto => {
-    let day = _toDay(crPhoto.node.timestamp);
+  return photos.map(cameraRollPhoto => {
+    let day = _toDay(cameraRollPhoto.node.timestamp);
     // collections are identified by a UTC-Day string
     return photos.filter(photo => {
       return _toDay(photo.node.timestamp).getTime() === day.getTime();
