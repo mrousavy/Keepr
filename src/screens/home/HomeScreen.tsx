@@ -9,21 +9,26 @@ import {
 import CollectionCard from '../../components/CollectionCard';
 import {BlurView} from '@react-native-community/blur';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
-import { PhotoIdentifier } from '@react-native-community/cameraroll';
-import { Dictionary } from 'lodash';
+import {Collection} from '../../models/HomeModel';
 
 const STATUSBAR_HEIGHT = getStatusBarHeight();
 
-interface State {
-  collections: Dictionary<PhotoIdentifier[]>,
+// type Props = {
+//   navigation: ProfileScreenNavigationProp;
+// };
+
+type State = {
+  collections?: Collection[],
 }
 
-export class HomeScreen extends React.Component {
+export class HomeScreen extends React.Component<{}, State> {
   state = {
-    collections: [],
+    collections: undefined,
   };
 
   render() {
+    console.log(this.state.collections);
+
     return (
       <View style={styles.home}>
         <FlatList
@@ -38,7 +43,7 @@ export class HomeScreen extends React.Component {
           data={this.state.collections}
           renderItem={({item}) => (
             <CollectionCard
-              item={item}
+              collection={item}
               onPress={() => this._onSelectCollection(item[0])}
             />
           )}
