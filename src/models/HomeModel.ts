@@ -1,7 +1,7 @@
 import CameraRoll, { PhotoIdentifier, PhotoIdentifiersPage, Album } from '@react-native-community/cameraroll';
 import _ from 'lodash';
+import { getNamedSwatches } from 'react-native-palette';
 import {RGB, hexToRgb} from '../utils/Colors';
-import { getColorFromURL } from 'rn-dominant-color';
 
 export type Collection = {
   name: string,
@@ -24,7 +24,7 @@ export async function createCollections(photos: PhotoIdentifiersPage) : Promise<
 
   Object.keys(groupedCollections).map(async collectionName => {
     let photos = groupedCollections[collectionName] as PhotoIdentifier[];
-    let {primary} = await getColorFromURL(photos[0].node.image.uri);
+    let {primary} = await getNamedSwatches(photos[0].node.image.uri);
     console.log(primary);
 
     collections.push({name: collectionName, dominantColor: hexToRgb(primary), photos: photos})
