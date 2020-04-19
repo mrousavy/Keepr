@@ -1,9 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, Image, Text, GestureResponderEvent} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
+import LinearGradient from 'react-native-linear-gradient';
 import Colors from '../styles/Colors';
 import {Collection} from '../models/HomeModel';
 import _ from 'lodash';
+import { rgbToHex, rgbApplyAlpha } from '../utils/Colors';
 
 type Props = {
   collection: Collection,
@@ -13,7 +15,13 @@ type Props = {
 export default class CollectionCard extends React.Component<Props, {}> {
   render() {
     const photos = this.props.collection.photos;
-    const visibleTiles = 9;
+    const color = this.props.collection.dominantColor;
+    let lighterColor = rgbApplyAlpha(color, 0.8);
+    let darkerColor = rgbApplyAlpha(color, 1.2);
+    let gradientColors = [rgbToHex(lighterColor), rgbToHex(color), rgbToHex(darkerColor)]
+
+    const visibleTiles = 6;
+
 
     return (
       <View style={styles.card}>
@@ -33,11 +41,9 @@ export default class CollectionCard extends React.Component<Props, {}> {
           })}
         </View>
 
-        <BlurView
-          style={styles.info}
-          blurType="light"
-          blurAmount={25}
-          reducedTransparencyFallbackColor="white">
+        <LinearGradient
+          colors={[Colors.primaryLight, Colors.primary, Colors.primaryDark]}
+          style={styles.info}>
           <Text style={styles.title}>
             {'Collection from ' + new Date().toLocaleDateString('de-AT')}
           </Text>
@@ -45,7 +51,7 @@ export default class CollectionCard extends React.Component<Props, {}> {
             "You've made quite a few images that day. Start sorting out your
             photos! ..."
           </Text>
-        </BlurView>
+        </LinearGradient>
       </View>
     );
   }
@@ -94,10 +100,10 @@ const styles = StyleSheet.create({
   },
   info: {
     padding: 10,
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    right: 0,
+    // position: 'absolute',
+    // left: 0,
+    // bottom: 0,
+    // right: 0,
   },
   title: {
     height: 20,

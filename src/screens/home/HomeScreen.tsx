@@ -18,18 +18,21 @@ const STATUSBAR_HEIGHT = getStatusBarHeight();
 // };
 
 type State = {
-  collections?: Collection[],
+  collections: Collection[],
 }
 
 export class HomeScreen extends React.Component<{}, State> {
   state = {
-    collections: undefined,
+    collections: [],
   };
 
   render() {
+    console.log(this.state.collections);
+
     return (
       <View style={styles.home}>
         <FlatList
+          style={styles.cardList}
           inverted
           extraData={false}
           ListEmptyComponent={
@@ -68,7 +71,7 @@ export class HomeScreen extends React.Component<{}, State> {
     });
   }
 
-  _onSelectCollection = key => {
+  _onSelectCollection = (key: any) => {
     this.props.navigation.navigate('Swipe', {
       collection: this.state.collections[key],
       collectionId: key,
@@ -81,6 +84,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column-reverse',
     backgroundColor: Colors.bg,
+  },
+  cardList: {
+    marginBottom: 20,
   },
   statusBarBlurView: {
     top: 0,
