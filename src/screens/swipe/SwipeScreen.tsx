@@ -14,6 +14,8 @@ import Slider from '@react-native-community/slider';
 import CardStack, {Card} from 'react-native-card-stack-swiper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteParams} from '../../Routes';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -28,6 +30,15 @@ if (screenWidth > screenHeight) {
 }
 console.log(cardWidth + ' x ' + cardHeight);
 const VIBRATE = false;
+
+export type SwipeScreenNavigationProp = StackNavigationProp<
+  RouteParams,
+  'Swipe'
+>;
+
+type Props = {
+  navigation: SwipeScreenNavigationProp;
+};
 
 export class SwipeScreen extends React.Component {
   static navigationOptions = {
@@ -47,7 +58,7 @@ export class SwipeScreen extends React.Component {
       ReactNativeHapticFeedback.trigger('impactLight');
     }
   }
-  slideDot = offset => {
+  slideDot = (offset) => {
     Animated.spring(this.state.selectedDotOffset, {
       toValue: offset,
     }).start();
@@ -89,7 +100,7 @@ export class SwipeScreen extends React.Component {
   }
   cardSwipedRight(index) {
     console.log(`swiped right: ${index}`);
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       shownImageIndex: parseInt(prevState.shownImageIndex) + 1,
     }));
     if (index == this.props.navigation.state.params.images.length - 1) {
@@ -98,7 +109,7 @@ export class SwipeScreen extends React.Component {
   }
   cardSwipedLeft(index) {
     console.log(`swiped left: ${index}`);
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       shownImageIndex: parseInt(prevState.shownImageIndex) + 1,
     }));
     if (index == this.props.navigation.state.params.images.length - 1) {
@@ -127,8 +138,8 @@ export class SwipeScreen extends React.Component {
             renderNoMoreCards={() => {}}
             disableBottomSwipe={true}
             disableTopSwipe={true}
-            onSwipedLeft={index => this.cardSwipedLeft(index)}
-            onSwipedRight={index => this.cardSwipedRight(index)}
+            onSwipedLeft={(index) => this.cardSwipedLeft(index)}
+            onSwipedRight={(index) => this.cardSwipedRight(index)}
             style={[
               styles.content,
               {
@@ -137,7 +148,7 @@ export class SwipeScreen extends React.Component {
                 marginTop: 50,
               },
             ]}
-            ref={swiper => {
+            ref={(swiper) => {
               this.swiper = swiper;
             }}>
             {images.map((image, index) => (
@@ -180,7 +191,7 @@ export class SwipeScreen extends React.Component {
                   style={{
                     display: shownImageIndex == index ? 'flex' : 'none',
                   }}
-                  onPress={evt => this.imagePressed(evt, index)}>
+                  onPress={(evt) => this.imagePressed(evt, index)}>
                   <Animated.Image
                     source={image}
                     resizeMode="contain"
@@ -220,7 +231,9 @@ export class SwipeScreen extends React.Component {
                   maximumValue={750}
                   minimumTrackTintColor="#555087"
                   maximumTrackTintColor="#aaaad6"
-                  onValueChange={v => this.scaleImageToPercent(parseInt(v), 0)}
+                  onValueChange={(v) =>
+                    this.scaleImageToPercent(parseInt(v), 0)
+                  }
                   value={this.state.zoomPercentageSlider}
                 />
                 <Text style={[styles.smallText, {flex: 1}]}>

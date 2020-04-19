@@ -5,6 +5,7 @@ import {Home} from './screens/home/Home';
 // import {Swipe} from './screens/swipe/Swipe';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Routes, RouteParams} from './Routes';
+import {Swipe} from './screens/swipe/Swipe';
 
 Icon.loadFont();
 
@@ -19,7 +20,7 @@ export default class App extends React.PureComponent {
           headerMode="none"
           initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
-          {/* <Stack.Screen name="Swipe" component={Swipe} /> */}
+          <Stack.Screen name="Swipe" component={Swipe} />
         </Stack.Navigator>
       </NavigationContainer>
     );

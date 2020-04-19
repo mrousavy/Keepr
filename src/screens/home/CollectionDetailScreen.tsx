@@ -9,8 +9,19 @@ import {
 import {BlurView} from '@react-native-community/blur';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {Collection} from '../../models/HomeModel';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteParams} from '../../Routes';
 
 const STATUSBAR_HEIGHT = getStatusBarHeight();
+
+export type CollectionDetailScreenNavigationProp = StackNavigationProp<
+  RouteParams,
+  'CollectionDetail'
+>;
+
+type Props = {
+  navigation: CollectionDetailScreenNavigationProp;
+};
 
 export class CollectionDetailScreen extends React.Component<{}, {}> {
   render() {

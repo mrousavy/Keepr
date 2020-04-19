@@ -5,7 +5,7 @@ import CameraRoll, {
 } from '@react-native-community/cameraroll';
 import _ from 'lodash';
 // import {getNamedSwatches, NamedSwatches} from 'react-native-palette';
-import {RGB, hexToRgb} from '../utils/Colors';
+// import {RGB, hexToRgb} from '../utils/Colors';
 
 // const getNamedSwatchesAsync = async (uri: string): Promise<NamedSwatches> => {
 //   return new Promise((resolve, reject) => {

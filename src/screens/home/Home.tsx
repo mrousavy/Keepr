@@ -5,6 +5,7 @@ import {HomeScreen} from './HomeScreen';
 import Routes, {RouteParams} from '../../Routes';
 import {CollectionDetailScreen} from './CollectionDetailScreen';
 import {TransitionSpec} from '@react-navigation/stack/lib/typescript/src/types';
+import {Swipe} from '../swipe/Swipe';
 
 export const iosTransitionSpec: TransitionSpec = {
   animation: 'spring',
@@ -78,6 +79,7 @@ export const Home = () => {
           // }
         }}
       />
+      <SharedElementStack.Screen name="Swipe" component={Swipe} />
     </SharedElementStack.Navigator>
   );
 };
