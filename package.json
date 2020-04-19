@@ -36,6 +36,7 @@
     "react-native-shared-element": "^0.6.1",
     "react-native-skeleton-placeholder": "^2.0.1",
     "react-native-status-bar-height": "^2.5.0",
+    "react-native-touchable-scale": "^2.1.1",
     "react-native-vector-icons": "^6.6.0",
     "react-native-view-overflow": "0.0.4",
     "react-navigation": "^4.3.7",

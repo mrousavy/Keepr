@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import LinearGradient from 'react-native-linear-gradient';
-import CardView from 'react-native-cardview';
+import TouchableScale from 'react-native-touchable-scale';
 import Colors from '../styles/Colors';
 import {Collection} from '../models/HomeModel';
 import _ from 'lodash';
@@ -30,44 +30,48 @@ export default class CollectionCard extends React.Component<Props, {}> {
     const visibleTiles = 9;
 
     return (
-      <View style={styles.card}>
-        <View style={styles.photos}>
-          {photos.map((photo, photoId) => {
-            let visiblePhotos = visibleTiles - 1;
+      <TouchableScale activeScale={0.95} friction={5} tension={50}>
+        <View style={styles.shadowContainer}>
+          <View style={styles.card}>
+            <View style={styles.photos}>
+              {photos.map((photo, photoId) => {
+                let visiblePhotos = visibleTiles - 1;
 
-            if (photoId < visiblePhotos) {
-              return (
-                <Image
-                  key={photoId}
-                  style={styles.tile}
-                  source={{uri: photo.node.image.uri}}
-                />
-              );
-            } else if (photoId === visiblePhotos) {
-              return (
-                <View style={styles.tile}>
-                  <Text key={'more'} style={styles.moreText}>
-                    {`+${photos.length - visiblePhotos} more`}
-                  </Text>
-                </View>
-              );
-            }
-          })}
+                if (photoId < visiblePhotos) {
+                  return (
+                    <Image
+                      key={photoId}
+                      style={styles.tile}
+                      source={{uri: photo.node.image.uri}}
+                    />
+                  );
+                } else if (photoId === visiblePhotos) {
+                  return (
+                    <View style={styles.tile}>
+                      <Text key={'more'} style={styles.moreText}>
+                        {`+${photos.length - visiblePhotos} more`}
+                      </Text>
+                    </View>
+                  );
+                }
+              })}
+            </View>
+
+            <LinearGradient
+              colors={[Colors.primaryLight, Colors.primary]}
+              style={styles.info}>
+              <Text style={styles.title}>
+                {'Collection from ' + new Date().toLocaleDateString('de-AT')}
+              </Text>
+              <Text style={styles.text}>
+                {
+                  "You've made quite a few images that day. Start sorting out your photos! ..."
+                }
+              </Text>
+            </LinearGradient>
+          </View>
         </View>
-
-        <LinearGradient
-          colors={[Colors.primaryLight, Colors.primary]}
-          style={styles.info}>
-          <Text style={styles.title}>
-            {'Collection from ' + new Date().toLocaleDateString('de-AT')}
-          </Text>
-          <Text style={styles.text}>
-            {
-              "You've made quite a few images that day. Start sorting out your photos! ..."
-            }
-          </Text>
-        </LinearGradient>
-      </View>
+      </TouchableScale>
     );
   }
 }
@@ -77,17 +81,19 @@ const imageSize = (count: number, margin: number) =>
 const imageMargin = 1;
 
 const styles = StyleSheet.create({
+  shadowContainer: {
+    shadowColor: 'rgba(0,0,0,0.8)',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.6,
+    shadowRadius: 5,
+    elevation: 5,
+  },
   card: {
     flexDirection: 'column',
     marginHorizontal: 20,
     marginTop: 20,
     overflow: 'hidden',
     borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    elevation: 5,
     backgroundColor: Colors.bgDark,
   },
   photos: {
