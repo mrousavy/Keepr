@@ -15,10 +15,10 @@ type Props = {
 export default class CollectionCard extends React.Component<Props, {}> {
   render() {
     const photos = this.props.collection.photos;
-    const color = this.props.collection.dominantColor;
-    let lighterColor = rgbApplyAlpha(color, 0.8);
-    let darkerColor = rgbApplyAlpha(color, 1.2);
-    let gradientColors = [rgbToHex(lighterColor), rgbToHex(color), rgbToHex(darkerColor)]
+    // const color = this.props.collection.dominantColor;
+    // let lighterColor = rgbApplyAlpha(color, 0.8);
+    // let darkerColor = rgbApplyAlpha(color, 1.2);
+    // let gradientColors = [rgbToHex(lighterColor), rgbToHex(color), rgbToHex(darkerColor)]
 
     const visibleTiles = 6;
 

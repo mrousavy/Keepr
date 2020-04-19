@@ -4,21 +4,21 @@ import CameraRoll, {
   Album,
 } from '@react-native-community/cameraroll';
 import _ from 'lodash';
-import {getNamedSwatches, NamedSwatches} from 'react-native-palette';
+// import {getNamedSwatches, NamedSwatches} from 'react-native-palette';
 import {RGB, hexToRgb} from '../utils/Colors';
 
-const getNamedSwatchesAsync = async (uri: string): Promise<NamedSwatches> => {
-  return new Promise((resolve, reject) => {
-    getNamedSwatches(uri, (error, swatches) => {
-      if (error) reject(error);
-      else resolve(swatches);
-    });
-  });
-};
+// const getNamedSwatchesAsync = async (uri: string): Promise<NamedSwatches> => {
+//   return new Promise((resolve, reject) => {
+//     getNamedSwatches(uri, (error, swatches) => {
+//       if (error) reject(error);
+//       else resolve(swatches);
+//     });
+//   });
+// };
 
 export type Collection = {
   name: string;
-  dominantColor: RGB;
+  // dominantColor: RGB;
   photos: PhotoIdentifier[];
 };
 
@@ -41,12 +41,12 @@ export async function createCollections(
 
   Object.keys(groupedCollections).map(async collectionName => {
     let photos = groupedCollections[collectionName] as PhotoIdentifier[];
-    let {Vibrant} = await getNamedSwatchesAsync(photos[0].node.image.uri);
-    console.log(Vibrant);
+    // let {Vibrant} = await getNamedSwatchesAsync(photos[0].node.image.uri);
+    // console.log(Vibrant);
 
     collections.push({
       name: collectionName,
-      dominantColor: hexToRgb(Vibrant.color),
+      // dominantColor: hexToRgb(Vibrant.color),
       photos: photos,
     });
   });
