@@ -3,8 +3,10 @@ import {TransitionPresets} from '@react-navigation/stack';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {HomeScreen} from './HomeScreen';
 import Routes from '../../Routes';
+import { CollectionDetailScreen } from './CollectionDetailScreen';
+import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types';
 
-export const iosTransitionSpec = {
+export const iosTransitionSpec: TransitionSpec = {
   animation: 'spring',
   config: {
     stiffness: 1000,
@@ -22,7 +24,6 @@ export const Home = () => {
     <SharedElementStack.Navigator
       mode="modal"
       screenOptions={{
-        useNativeDriver: true,
         gestureEnabled: false,
         // gestureResponseDistance: {
         // 	vertical: 100,

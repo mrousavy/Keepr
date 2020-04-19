@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, FlatList} from 'react-native';
 import Colors from '../../styles/Colors';
 import {
   loadPhotos,
