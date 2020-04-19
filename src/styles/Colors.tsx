@@ -3,9 +3,10 @@ const Colors = {
   bgDark: '#F6F8FA',
   bgDarker: '#EEEDE8',
 
-  text: '#000000',
-  textLight: '#D3D3D3',
-  textLighter: '#DDDDDD',
+  textDark: '#D3D3D3',
+  textDarker: '#000000',
+  textLight: '#EDEDED',
+  textLighter: '#FFFFFF',
 
   primary: '#0C82E8',
   primaryDark: '#0089EB',
