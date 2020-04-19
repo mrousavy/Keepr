@@ -235,13 +235,15 @@ PODS:
     - React-Core
     - React-RCTImage
     - RSKImageCropper
+  - RNDominantColor (1.4.3):
+    - React
   - RNGestureHandler (1.6.1):
     - React
   - RNReactNativeHapticFeedback (1.9.0):
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScreens (2.4.0):
+  - RNScreens (2.5.0):
     - React
   - RNSharedElement (0.6.1):
     - React
@@ -286,6 +288,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNCustomizedImagePicker (from `../node_modules/react-native-customized-image-picker`)
+  - RNDominantColor (from `../node_modules/rn-dominant-color`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -365,6 +368,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNCustomizedImagePicker:
     :path: "../node_modules/react-native-customized-image-picker"
+  RNDominantColor:
+    :path: "../node_modules/rn-dominant-color"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReactNativeHapticFeedback:
@@ -414,10 +419,11 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNCMaskedView: 5dba3cb07493765fb66156c83c3dd281ca709a48
   RNCustomizedImagePicker: 0311b7bd61302b112cb6f1c9179d1105b475d0cc
+  RNDominantColor: 5fef2f987cfbca5c25e9f50bd89cf9679c77458e
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReactNativeHapticFeedback: 2566b468cc8d0e7bb2f84b23adc0f4614594d071
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
+  RNScreens: ac02d0e4529f08ced69f5580d416f968a6ec3a1d
   RNSharedElement: a71a4fd469c027b964f0cbd444d5b66ae0776c29
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
