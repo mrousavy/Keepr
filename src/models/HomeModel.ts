@@ -25,6 +25,8 @@ export async function createCollections(photos: PhotoIdentifiersPage) : Promise<
   Object.keys(groupedCollections).map(async collectionName => {
     let photos = groupedCollections[collectionName] as PhotoIdentifier[];
     let {primary} = await getColorFromURL(photos[0].node.image.uri);
+    console.log(primary);
+
     collections.push({name: collectionName, dominantColor: hexToRgb(primary), photos: photos})
   });
   return collections;
