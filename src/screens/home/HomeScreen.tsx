@@ -33,6 +33,7 @@ export class HomeScreen extends React.Component<{}, State> {
       <View style={styles.home}>
         <FlatList
           style={styles.cardList}
+          contentContainerStyle={styles.cardListContent}
           inverted
           extraData={false}
           ListEmptyComponent={
@@ -86,7 +87,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.bg,
   },
   cardList: {
-    marginBottom: 20,
+    // marginBottom: 20,
+  },
+  cardListContent: {
+    paddingVertical: STATUSBAR_HEIGHT,
   },
   statusBarBlurView: {
     top: 0,
