@@ -189,6 +189,8 @@ PODS:
     - React
   - react-native-cameraroll (1.5.2):
     - React
+  - react-native-palette (1.0.0):
+    - React
   - react-native-safe-area-context (0.7.3):
     - React
   - react-native-slider (2.0.9):
@@ -235,8 +237,6 @@ PODS:
     - React-Core
     - React-RCTImage
     - RSKImageCropper
-  - RNDominantColor (1.4.3):
-    - React
   - RNGestureHandler (1.6.1):
     - React
   - RNReactNativeHapticFeedback (1.9.0):
@@ -273,6 +273,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
   - "react-native-cameraroll (from `../node_modules/@react-native-community/cameraroll`)"
+  - react-native-palette (from `../node_modules/react-native-palette`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -288,7 +289,6 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNCustomizedImagePicker (from `../node_modules/react-native-customized-image-picker`)
-  - RNDominantColor (from `../node_modules/rn-dominant-color`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -340,6 +340,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/blur"
   react-native-cameraroll:
     :path: "../node_modules/@react-native-community/cameraroll"
+  react-native-palette:
+    :path: "../node_modules/react-native-palette"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-slider:
@@ -368,8 +370,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNCustomizedImagePicker:
     :path: "../node_modules/react-native-customized-image-picker"
-  RNDominantColor:
-    :path: "../node_modules/rn-dominant-color"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReactNativeHapticFeedback:
@@ -405,6 +405,7 @@ SPEC CHECKSUMS:
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
   react-native-cameraroll: 81c6c271b5b853da398ccecc7ad6a5f765fd3001
+  react-native-palette: 0d54c504dd9c9825afca8559362a5977a4f4e0cd
   react-native-safe-area-context: 8260e5157617df4b72865f44006797f895b2ada7
   react-native-slider: b34d943dc60deb96d952ba6b6b249aa8091e86da
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
@@ -419,7 +420,6 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNCMaskedView: 5dba3cb07493765fb66156c83c3dd281ca709a48
   RNCustomizedImagePicker: 0311b7bd61302b112cb6f1c9179d1105b475d0cc
-  RNDominantColor: 5fef2f987cfbca5c25e9f50bd89cf9679c77458e
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReactNativeHapticFeedback: 2566b468cc8d0e7bb2f84b23adc0f4614594d071
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
