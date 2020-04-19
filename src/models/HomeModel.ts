@@ -1,33 +1,54 @@
-import CameraRoll, { PhotoIdentifier, PhotoIdentifiersPage, Album } from '@react-native-community/cameraroll';
+import CameraRoll, {
+  PhotoIdentifier,
+  PhotoIdentifiersPage,
+  Album,
+} from '@react-native-community/cameraroll';
 import _ from 'lodash';
-import { getNamedSwatches } from 'react-native-palette';
+import {getNamedSwatches, NamedSwatches} from 'react-native-palette';
 import {RGB, hexToRgb} from '../utils/Colors';
 
+const getNamedSwatchesAsync = async (uri: string): Promise<NamedSwatches> => {
+  return new Promise((resolve, reject) => {
+    getNamedSwatches(uri, (error, swatches) => {
+      if (error) reject(error);
+      else resolve(swatches);
+    });
+  });
+};
+
 export type Collection = {
-  name: string,
-  dominantColor: RGB,
-  photos: PhotoIdentifier[],
-}
+  name: string;
+  dominantColor: RGB;
+  photos: PhotoIdentifier[];
+};
 
 export async function loadPhotos(count = 100) {
   return await CameraRoll.getPhotos({first: count});
 }
 
-export async function loadAlbums() : Promise<Album[]> {
+export async function loadAlbums(): Promise<Album[]> {
   return await CameraRoll.getAlbums({});
 }
 
-export async function createCollections(photos: PhotoIdentifiersPage) : Promise<Collection[]> {
+export async function createCollections(
+  photos: PhotoIdentifiersPage,
+): Promise<Collection[]> {
   // Group photos by day and add them to collections object
-  let groupedCollections = _.toPlainObject(_.groupBy(photos.edges, photo => _toDay(photo.node.timestamp)));
+  let groupedCollections = _.toPlainObject(
+    _.groupBy(photos.edges, photo => _toDay(photo.node.timestamp)),
+  );
   let collections: Collection[] = [];
 
   Object.keys(groupedCollections).map(async collectionName => {
     let photos = groupedCollections[collectionName] as PhotoIdentifier[];
-    let {primary} = await getNamedSwatches(photos[0].node.image.uri);
-    console.log(primary);
+    let {Vibrant} = await getNamedSwatchesAsync(photos[0].node.image.uri);
+    console.log(Vibrant);
 
-    collections.push({name: collectionName, dominantColor: hexToRgb(primary), photos: photos})
+    collections.push({
+      name: collectionName,
+      dominantColor: hexToRgb(Vibrant.color),
+      photos: photos,
+    });
   });
   return collections;
 }
