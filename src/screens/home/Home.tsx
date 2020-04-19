@@ -2,6 +2,7 @@ import React from 'react';
 import {TransitionPresets} from '@react-navigation/stack';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {HomeScreen} from './HomeScreen';
+import Routes from '../../Routes';
 
 export const iosTransitionSpec = {
   animation: 'spring',
@@ -41,40 +42,41 @@ export const Home = () => {
         }),
       }}
       headerMode="none"
-      initialRouteName="HomeScreen">
-      <SharedElementStack.Screen name="HomeScreen" component={HomeScreen} />
-      {/* <SharedElementStack.Screen
-        name="CollectionDetailScreen"
+      initialRouteName={Routes.Home}>
+      <SharedElementStack.Screen name={Routes.Home} component={HomeScreen} />
+      <SharedElementStack.Screen
+        name={Routes.CollectionDetail}
         component={CollectionDetailScreen}
         sharedElementsConfig={(route, otherRoute, showing) => {
-          const {item} = route.params;
-          if (route.name === 'ItemDetailsScreen' && showing) {
-            return [
-              {
-                id: `item.${item.id}.image`,
-              },
-              {
-                id: `item.${item.id}.title`,
-                animation: 'fade',
-                resize: 'clip',
-                align: 'left-top',
-              },
-              {
-                id: `item.${item.id}.description`,
-                animation: 'fade',
-                resize: 'clip',
-                align: 'left-top',
-              },
-            ];
-          } else {
-            return [
-              {
-                id: `item.${item.id}.image`,
-              },
-            ];
-          }
+          console.log('navigating shared element with params', route.params);
+          const {collection} = route.params;
+          // if (route.name === 'CollectionDetailScreen' && showing) {
+          return [
+            {
+              id: `collection.${collection.id}.image`,
+            },
+            {
+              id: `collection.${collection.id}.title`,
+              animation: 'fade',
+              resize: 'clip',
+              align: 'left-top',
+            },
+            {
+              id: `collection.${collection.id}.description`,
+              animation: 'fade',
+              resize: 'clip',
+              align: 'left-top',
+            },
+          ];
+          // } else {
+          //   return [
+          //     {
+          //       id: `item.${item.id}.image`,
+          //     },
+          //   ];
+          // }
         }}
-      /> */}
+      />
     </SharedElementStack.Navigator>
   );
 };
