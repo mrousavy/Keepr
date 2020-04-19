@@ -7,21 +7,25 @@ import {
   createCollections,
 } from '../../models/HomeModel';
 import CollectionCard from '../../components/CollectionCard';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {BlurView} from '@react-native-community/blur';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {Collection} from '../../models/HomeModel';
+import {RouteParams} from '../../Routes';
 
 const STATUSBAR_HEIGHT = getStatusBarHeight();
 
-// type Props = {
-//   navigation: ProfileScreenNavigationProp;
-// };
+export type HomeScreenNavigationProp = StackNavigationProp<RouteParams, 'Home'>;
+
+type Props = {
+  navigation: HomeScreenNavigationProp;
+};
 
 type State = {
   collections: Collection[];
 };
 
-export class HomeScreen extends React.Component<{}, State> {
+export class HomeScreen extends React.Component<Props, State> {
   state = {
     collections: [],
   };
@@ -44,7 +48,7 @@ export class HomeScreen extends React.Component<{}, State> {
           renderItem={({item}) => (
             <CollectionCard
               collection={item}
-              onPress={() => this._onSelectCollection(item[0])}
+              navigation={this.props.navigation}
             />
           )}
         />
@@ -69,13 +73,6 @@ export class HomeScreen extends React.Component<{}, State> {
       collections: collections,
     });
   }
-
-  _onSelectCollection = (key: any) => {
-    this.props.navigation.navigate('Swipe', {
-      collection: this.state.collections[key],
-      collectionId: key,
-    });
-  };
 }
 
 const styles = StyleSheet.create({

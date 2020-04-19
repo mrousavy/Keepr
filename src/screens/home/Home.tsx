@@ -2,7 +2,7 @@ import React from 'react';
 import {TransitionPresets} from '@react-navigation/stack';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {HomeScreen} from './HomeScreen';
-import Routes from '../../Routes';
+import Routes, {RouteParams} from '../../Routes';
 import {CollectionDetailScreen} from './CollectionDetailScreen';
 import {TransitionSpec} from '@react-navigation/stack/lib/typescript/src/types';
 
@@ -18,7 +18,7 @@ export const iosTransitionSpec: TransitionSpec = {
   },
 };
 
-const SharedElementStack = createSharedElementStackNavigator();
+const SharedElementStack = createSharedElementStackNavigator<RouteParams>();
 export const Home = () => {
   return (
     <SharedElementStack.Navigator
@@ -43,10 +43,10 @@ export const Home = () => {
         }),
       }}
       headerMode="none"
-      initialRouteName={Routes.Home}>
-      <SharedElementStack.Screen name={Routes.Home} component={HomeScreen} />
+      initialRouteName="Home">
+      <SharedElementStack.Screen name="Home" component={HomeScreen} />
       <SharedElementStack.Screen
-        name={Routes.CollectionDetail}
+        name="CollectionDetail"
         component={CollectionDetailScreen}
         sharedElementsConfig={(route, otherRoute, showing) => {
           console.log('navigating shared element with params', route.params);

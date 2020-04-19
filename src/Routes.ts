@@ -1,7 +1,11 @@
-const Routes = {
-  Home: 'HomeScreen',
-  CollectionDetail: 'CollectionDetailScreen',
-  Swipe: 'SwipeScreen',
-};
+import {Collection} from './models/HomeModel';
 
-export default Routes;
+export type RouteParams = {
+  Home: undefined;
+  CollectionDetail: {
+    collection: Collection;
+  };
+  Swipe: {
+    collection: Collection;
+  };
+};

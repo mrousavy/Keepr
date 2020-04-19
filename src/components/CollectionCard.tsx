@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  GestureResponderEvent,
-} from 'react-native';
+import {View, StyleSheet, Image, Text} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import LinearGradient from 'react-native-linear-gradient';
 import TouchableScale from 'react-native-touchable-scale';
@@ -13,10 +7,11 @@ import Colors from '../styles/Colors';
 import {Collection} from '../models/HomeModel';
 import _ from 'lodash';
 import {rgbToHex, rgbApplyAlpha} from '../utils/Colors';
+import {HomeScreenNavigationProp} from '../screens/home/HomeScreen';
 
 type Props = {
   collection: Collection;
-  onPress: (event: GestureResponderEvent) => void;
+  navigation: HomeScreenNavigationProp;
 };
 
 export default class CollectionCard extends React.Component<Props, {}> {
@@ -30,7 +25,15 @@ export default class CollectionCard extends React.Component<Props, {}> {
     const visibleTiles = 9;
 
     return (
-      <TouchableScale activeScale={0.95} friction={5} tension={50}>
+      <TouchableScale
+        activeScale={0.95}
+        friction={5}
+        tension={50}
+        onPress={() =>
+          this.props.navigation.navigate('Swipe', {
+            collection: this.props.collection,
+          })
+        }>
         <View style={styles.shadowContainer}>
           <View style={styles.card}>
             <View style={styles.photos}>
