@@ -18,8 +18,8 @@ const STATUSBAR_HEIGHT = getStatusBarHeight();
 // };
 
 type State = {
-  collections: Collection[],
-}
+  collections: Collection[];
+};
 
 export class HomeScreen extends React.Component<{}, State> {
   state = {

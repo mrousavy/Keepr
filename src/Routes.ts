@@ -1,7 +1,7 @@
 const Routes = {
   Home: 'HomeScreen',
   CollectionDetail: 'CollectionDetailScreen',
-  Swipe: 'SwipeScreen'
+  Swipe: 'SwipeScreen',
 };
 
 export default Routes;

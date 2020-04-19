@@ -1,16 +1,23 @@
 import React from 'react';
-import {View, StyleSheet, Image, Text, GestureResponderEvent} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  GestureResponderEvent,
+} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import LinearGradient from 'react-native-linear-gradient';
+import CardView from 'react-native-cardview';
 import Colors from '../styles/Colors';
 import {Collection} from '../models/HomeModel';
 import _ from 'lodash';
-import { rgbToHex, rgbApplyAlpha } from '../utils/Colors';
+import {rgbToHex, rgbApplyAlpha} from '../utils/Colors';
 
 type Props = {
-  collection: Collection,
-  onPress: (event: GestureResponderEvent) => void
-}
+  collection: Collection;
+  onPress: (event: GestureResponderEvent) => void;
+};
 
 export default class CollectionCard extends React.Component<Props, {}> {
   render() {
@@ -21,7 +28,6 @@ export default class CollectionCard extends React.Component<Props, {}> {
     // let gradientColors = [rgbToHex(lighterColor), rgbToHex(color), rgbToHex(darkerColor)]
 
     const visibleTiles = 9;
-
 
     return (
       <View style={styles.card}>
@@ -39,13 +45,8 @@ export default class CollectionCard extends React.Component<Props, {}> {
               );
             } else if (photoId === visiblePhotos) {
               return (
-                <View style={
-                  styles.tile}>
-                  <Text
-                    key={'more'}
-                    style={
-                      styles.moreText
-                    }>
+                <View style={styles.tile}>
+                  <Text key={'more'} style={styles.moreText}>
                     {`+${photos.length - visiblePhotos} more`}
                   </Text>
                 </View>
@@ -61,8 +62,9 @@ export default class CollectionCard extends React.Component<Props, {}> {
             {'Collection from ' + new Date().toLocaleDateString('de-AT')}
           </Text>
           <Text style={styles.text}>
-            "You've made quite a few images that day. Start sorting out your
-            photos! ..."
+            {
+              "You've made quite a few images that day. Start sorting out your photos! ..."
+            }
           </Text>
         </LinearGradient>
       </View>
@@ -81,12 +83,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     overflow: 'hidden',
     borderRadius: 20,
-    shadowColor: 'rgba(0,0,0,0.5)',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.5,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    elevation: 5,
     backgroundColor: Colors.bgDark,
   },
   photos: {
@@ -102,7 +103,6 @@ const styles = StyleSheet.create({
     width: imageSize(3, imageMargin) + '%',
     height: 0,
     aspectRatio: 1,
-    borderColor: Colors.textLight,
     backgroundColor: Colors.bgDarker,
     margin: imageMargin,
     justifyContent: 'center',
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   moreText: {
     fontSize: 12,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   info: {
     padding: 10,

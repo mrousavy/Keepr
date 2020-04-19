@@ -16,8 +16,6 @@ export class CollectionDetailScreen extends React.Component<{}, {}> {
   render() {
     return (
       <View style={styles.home}>
-
-
         <BlurView
           blurType="light"
           blurAmount={10}
