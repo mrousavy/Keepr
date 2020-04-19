@@ -27,8 +27,6 @@ export class HomeScreen extends React.Component<{}, State> {
   };
 
   render() {
-    console.log(this.state.collections);
-
     return (
       <View style={styles.home}>
         <FlatList

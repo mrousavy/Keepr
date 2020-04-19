@@ -16,10 +16,11 @@ import {RGB, hexToRgb} from '../utils/Colors';
 //   });
 // };
 
-export type Collection = {
-  name: string;
-  // dominantColor: RGB;
-  photos: PhotoIdentifier[];
+export interface Collection {
+  id: number,
+  name: string,
+  // dominantColor: RGB,
+  photos: PhotoIdentifier[],
 };
 
 export async function loadPhotos(count = 100) {

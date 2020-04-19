@@ -8,11 +8,11 @@ const Colors = {
   textLight: '#EDEDED',
   textLighter: '#FFFFFF',
 
-  primary: '#0C82E8',
-  primaryDark: '#0089EB',
-  primaryDarker: '#0D76FF',
-  primaryLight: '#00CFEB',
-  primarLighter: '#00FFF6',
+  primary: '#7f78d2',
+  primaryDark: '#585391',
+  // primaryDarker: '#0D76FF',
+  primaryLight: '#a6b1e1',
+  // primarLighter: '#00FFF6',
 };
 
 export default Colors;

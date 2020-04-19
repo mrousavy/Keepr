@@ -20,7 +20,7 @@ export default class CollectionCard extends React.Component<Props, {}> {
     // let darkerColor = rgbApplyAlpha(color, 1.2);
     // let gradientColors = [rgbToHex(lighterColor), rgbToHex(color), rgbToHex(darkerColor)]
 
-    const visibleTiles = 6;
+    const visibleTiles = 9;
 
 
     return (
@@ -29,7 +29,7 @@ export default class CollectionCard extends React.Component<Props, {}> {
           {photos.map((photo, photoId) => {
             let visiblePhotos = visibleTiles - 1;
 
-            if (photoId <= visiblePhotos) {
+            if (photoId < visiblePhotos) {
               return (
                 <Image
                   key={photoId}
@@ -37,12 +37,25 @@ export default class CollectionCard extends React.Component<Props, {}> {
                   source={{uri: photo.node.image.uri}}
                 />
               );
+            } else if (photoId === visiblePhotos) {
+              return (
+                <View style={
+                  styles.tile}>
+                  <Text
+                    key={'more'}
+                    style={
+                      styles.moreText
+                    }>
+                    {`+${photos.length - visiblePhotos} more`}
+                  </Text>
+                </View>
+              );
             }
           })}
         </View>
 
         <LinearGradient
-          colors={[Colors.primaryLight, Colors.primary, Colors.primaryDark]}
+          colors={[Colors.primaryLight, Colors.primary]}
           style={styles.info}>
           <Text style={styles.title}>
             {'Collection from ' + new Date().toLocaleDateString('de-AT')}
@@ -89,14 +102,15 @@ const styles = StyleSheet.create({
     width: imageSize(3, imageMargin) + '%',
     height: 0,
     aspectRatio: 1,
-    borderColor: Colors.text,
-    margin: imageMargin,
-  },
-  more: {
+    borderColor: Colors.textLight,
     backgroundColor: Colors.bgDarker,
+    margin: imageMargin,
     justifyContent: 'center',
     alignItems: 'center',
-    textAlign: 'center',
+  },
+  moreText: {
+    fontSize: 12,
+    fontWeight: 'bold'
   },
   info: {
     padding: 10,
