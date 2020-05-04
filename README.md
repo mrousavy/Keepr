@@ -8,3 +8,7 @@ An app to compare photos one by one and decide what to keep and what to delete. 
 </div>
 
 > this app is still work in progress.
+
+## Working on iOS with different development teams
+
+If you want to work with different developer teams - in case you have not applied for a "Apple Developer Program" Membership, you can execute the following command, to ignore certain parts in Xcode'
